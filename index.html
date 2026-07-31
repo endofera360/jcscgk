@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>JCSC General-Knowledge Club | জেসিএসসি জেনারেল-নলেজ ক্লাব</title>
 <meta name="description" content="Jolshiri Cantonment School and College General Knowledge Club — BCS, ISSB & Viva Board quiz hub." />
-<link rel="icon" href="https://placehold.co/100x100/0B1F3A/C9A24B?text=J" />
+<link rel="icon" href="image_bbe6d5.jpg" id="favicon" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla&family=Noto+Serif+Bengali:wght@500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
@@ -21,33 +21,42 @@
   --terracotta: #B4543A;
   --red: #C0392B;
   --radius: 16px;
-  --shadow: 0 14px 34px rgba(11, 31, 58, 0.14);
+  --shadow: 0 14px 34px rgba(0, 0, 0, 0.25);
 
-  --bg: var(--paper);
-  --surface: #FFFFFF;
-  --text: var(--ink);
-  --text-muted: #5B6270;
-  --accent: var(--gold);
-  --primary: var(--navy);
-  --border: rgba(11, 31, 58, 0.12);
+  /* Light Theme Defaults */
+  --bg-light: var(--paper);
+  --surface-light: #FFFFFF;
+  --text-light: var(--ink);
+  --text-muted-light: #5B6270;
+  --accent-light: var(--gold);
+  --primary-light: var(--navy);
+  --border-light: rgba(11, 31, 58, 0.12);
+
+  /* Dark Theme Defaults */
+  --bg-dark: #0A1120;
+  --surface-dark: #121B2E;
+  --text-dark: #ECEEF3;
+  --text-muted-dark: #9DA6B8;
+  --accent-dark: var(--gold-soft);
+  --primary-dark: #101B30;
+  --border-dark: rgba(232, 206, 134, 0.16);
+}
+
+html[data-theme='light'] {
+  --bg: var(--bg-light); --surface: var(--surface-light); --text: var(--text-light);
+  --text-muted: var(--text-muted-light); --accent: var(--accent-light);
+  --primary: var(--primary-light); --border: var(--border-light);
 }
 
 html[data-theme='dark'] {
-  --bg: #0A1120;
-  --surface: #121B2E;
-  --text: #ECEEF3;
-  --text-muted: #9DA6B8;
-  --accent: var(--gold-soft);
-  --primary: #101B30;
-  --border: rgba(232, 206, 134, 0.16);
+  --bg: var(--bg-dark); --surface: var(--surface-dark); --text: var(--text-dark);
+  --text-muted: var(--text-muted-dark); --accent: var(--accent-dark);
+  --primary: var(--primary-dark); --border: var(--border-dark);
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-
-/* CRITICAL FIX: Ensures modals stay hidden until clicked */
 [hidden] { display: none !important; }
-
+html { scroll-behavior: smooth; }
 body {
   margin: 0;
   background: var(--bg);
@@ -67,12 +76,12 @@ img { max-width:100%; display:block; }
 .site-header { position:sticky; top:0; z-index:50; background:var(--primary); color:#F6F4EE; border-bottom:1px solid var(--border); }
 .site-header .container { display:flex; align-items:center; justify-content:space-between; height:66px; }
 .brand { display:flex; align-items:center; gap:10px; font-weight:700; cursor:pointer; user-select:none; }
-.brand-logo { width:38px; height:38px; border-radius:50%; object-fit:cover; }
+.brand-logo { width:38px; height:38px; border-radius:50%; object-fit: cover; background: #fff;}
 .nav-links { display:none; gap:26px; font-size:.95rem; }
 .nav-links a { text-decoration:none; opacity:.85; }
 .nav-links a:hover { opacity:1; color:var(--gold-soft); }
 .header-actions { display:flex; align-items:center; gap:8px; }
-.icon-btn { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); color:inherit; border-radius:10px; padding:9px 13px; font-size:.85rem; font-weight:700; }
+.icon-btn { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); color:inherit; border-radius:10px; padding:9px 13px; font-size:.85rem; font-weight:700; transition: background 0.2s; }
 .icon-btn:hover { background:rgba(255,255,255,.18); }
 .hamburger { display:inline-flex; }
 @media (min-width:780px){ .nav-links{display:flex;} .hamburger{display:none;} }
@@ -90,8 +99,9 @@ img { max-width:100%; display:block; }
   linear-gradient(180deg, var(--navy-deep), var(--navy));
   color:#F6F4EE; padding:56px 0 64px; text-align:center; }
 .hero-inner { display:flex; flex-direction:column; align-items:center; }
-.hero-badge { margin-bottom:18px; }
-.hero-logo { width:104px; height:104px; border-radius:50%; object-fit:cover; box-shadow:0 0 0 4px rgba(201,162,75,.35), var(--shadow); animation: floaty 5s ease-in-out infinite; }
+.hero-badge { margin-bottom:18px; position: relative; }
+.hero-logo { width:104px; height:104px; border-radius:50%; box-shadow:0 0 0 4px rgba(201,162,75,.35), var(--shadow); animation: floaty 5s ease-in-out infinite; object-fit: cover; background: #fff;}
+.est-badge { position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); background: var(--gold); color: var(--navy-deep); font-size: 0.7rem; font-weight: 800; padding: 4px 10px; border-radius: 20px; border: 2px solid var(--navy); white-space: nowrap;}
 @keyframes floaty { 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-8px);} }
 .eyebrow { display:inline-block; font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; color:var(--gold-soft); font-weight:700; margin-bottom:14px; }
 .hero h1 { font-size:clamp(1.7rem,5vw,2.7rem); max-width:20ch; margin:0 0 16px; }
@@ -112,7 +122,7 @@ img { max-width:100%; display:block; }
 .tag-eyebrow { display:inline-block; font-size:.75rem; text-transform:uppercase; letter-spacing:.08em; color:var(--accent); font-weight:800; margin-bottom:8px; }
 
 .grid { display:grid; gap:18px; grid-template-columns:1fr; }
-@media (min-width:640px){ .grid.cols-2{grid-template-columns:1fr 1fr;} .grid.cols-3{grid-template-columns:repeat(3,1fr);} }
+@media (min-width:640px){ .grid.cols-2{grid-template-columns:1fr 1fr;} .grid.cols-3{grid-template-columns:repeat(3,1fr);} .grid.cols-4{grid-template-columns:repeat(4,1fr);} }
 .card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:22px; }
 
 .feature-card { text-align:center; }
@@ -120,28 +130,31 @@ img { max-width:100%; display:block; }
 .feature-card h3 { font-size:1.05rem; margin-bottom:6px; }
 .feature-card p { color:var(--text-muted); font-size:.92rem; margin:0; }
 
-.members-heading { margin:38px 0 16px; font-size:1.2rem; }
-.member-card { text-align:center; position:relative; }
+.members-heading { margin:38px 0 16px; font-size:1.2rem; display: flex; justify-content: space-between; align-items: center;}
+.member-card { text-align:center; position:relative; display: flex; flex-direction: column; align-items: center; justify-content: flex-start;}
 .member-photo { width:88px; height:88px; border-radius:50%; object-fit:cover; margin:0 auto 12px; border:3px solid var(--gold); background:var(--border); }
-.member-name { font-weight:800; margin:0; }
-.member-role { color:var(--text-muted); font-size:.85rem; margin:2px 0 0; }
+.member-name { font-weight:800; margin:0; font-size: 1.1rem; }
+.member-role { color:var(--accent); font-size:.85rem; font-weight: 700; margin:4px 0; }
+.member-desc { color:var(--text-muted); font-size: 0.8rem; line-height: 1.4; margin: 4px 0 0;}
 
 .quiz-section { background:linear-gradient(180deg, transparent, rgba(201,162,75,.06)); }
 .mode-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:10px; }
 @media (min-width:640px){ .mode-grid{grid-template-columns:repeat(4,1fr);} }
-.mode-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:26px 12px; text-align:center; font-weight:800; display:flex; flex-direction:column; align-items:center; gap:8px; transition:transform .15s ease, border-color .15s ease; }
+.mode-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:26px 12px; text-align:center; font-weight:800; display:flex; flex-direction:column; align-items:center; gap:8px; transition:transform .15s ease, border-color .15s ease; color: var(--text); }
 .mode-card:hover { border-color:var(--accent); transform:translateY(-3px); }
 .mode-emoji { font-size:1.6rem; }
 
 .progress-stripes { display:flex; gap:4px; margin:22px 0; flex-wrap:wrap; }
-.stripe { width:20px; height:8px; border-radius:3px; background:var(--border); }
+.stripe { width:20px; height:8px; border-radius:3px; background:var(--border); transition: background 0.3s;}
 .stripe.done { background:var(--gold); }
 .stripe.current { background:var(--accent); outline:2px solid var(--gold-soft); outline-offset:1px; }
 
 .question-card { padding:28px 22px; }
 .question-topic { font-size:.75rem; text-transform:uppercase; letter-spacing:.08em; color:var(--accent); font-weight:800; margin-bottom:10px; }
-.question-text { font-size:1.2rem; margin:0 0 20px; font-family:'Noto Serif Bengali',serif; }
-.option-btn { display:block; width:100%; text-align:left; background:var(--bg); border:1px solid var(--border); border-radius:11px; padding:14px 16px; margin-bottom:10px; font-size:.98rem; transition:border-color .15s ease, background .15s ease; }
+.question-text { font-size:1.2rem; margin:0 0 20px; font-family:'Noto Serif Bengali',serif; line-height: 1.4; }
+.media-container { width: 100%; border-radius: 12px; overflow: hidden; margin-bottom: 20px; background: #000; text-align: center; }
+.media-container img, .media-container video { max-width: 100%; max-height: 350px; display: inline-block; }
+.option-btn { display:block; width:100%; text-align:left; background:var(--bg); border:1px solid var(--border); color: var(--text); border-radius:11px; padding:14px 16px; margin-bottom:10px; font-size:.98rem; transition:border-color .15s ease, background .15s ease; }
 .option-btn:hover:not(:disabled) { border-color:var(--accent); }
 .option-btn.correct { background:rgba(46,125,91,.16); border-color:var(--green); font-weight:700; }
 .option-btn.incorrect { background:rgba(180,84,58,.16); border-color:var(--terracotta); }
@@ -152,11 +165,11 @@ img { max-width:100%; display:block; }
 .score-badge { font-weight:900; font-size:2.4rem; color:var(--accent); margin-bottom:8px; }
 
 .site-footer { background:var(--navy-deep); color:rgba(246,244,238,.72); padding:32px 0; margin-top:44px; text-align:center; font-size:.85rem; }
-.footer-logo { width:40px; height:40px; border-radius:50%; margin:0 auto 12px; opacity:.9; object-fit:cover; }
+.footer-logo { width:40px; height:40px; border-radius:50%; margin:0 auto 12px; opacity:.9; object-fit: cover; background: #fff;}
 .footer-trigger { cursor:default; user-select:none; }
 
-.modal-backdrop { position:fixed; inset:0; background:rgba(7,20,38,.6); display:flex; align-items:center; justify-content:center; z-index:200; padding:16px; }
-.modal { background:var(--surface); border-radius:var(--radius); padding:26px; width:100%; max-width:400px; box-shadow:var(--shadow); max-height:90vh; overflow:auto; }
+.modal-backdrop { position:fixed; inset:0; background:rgba(7,20,38,.6); backdrop-filter: blur(4px); display:flex; align-items:center; justify-content:center; z-index:200; padding:16px; }
+.modal { background:var(--surface); border-radius:var(--radius); padding:26px; width:100%; max-width:400px; box-shadow:var(--shadow); max-height:90vh; overflow-y:auto; }
 .modal.wide { max-width:720px; }
 .two-col { display:grid; grid-template-columns:1fr; gap:0 18px; }
 @media (min-width:640px){ .two-col{grid-template-columns:1fr 1fr;} }
@@ -168,18 +181,18 @@ img { max-width:100%; display:block; }
 .error-text { color:var(--red); font-size:.85rem; margin:0 0 10px; }
 .photo-preview { width:70px; height:70px; border-radius:50%; object-fit:cover; margin-top:8px; }
 
-.edit-on .editable { outline:1px dashed var(--accent); border-radius:6px; cursor:text; }
-.edit-on .editable:hover { background:rgba(201,162,75,.12); }
-.edit-on .editable:focus { outline:2px solid var(--accent); background:rgba(201,162,75,.08); }
+.edit-on .editable { outline:1px dashed var(--accent); border-radius:6px; cursor:text; padding: 2px; }
+.edit-on .editable:hover { background:rgba(201,162,75,.15); }
+.edit-on .editable:focus { outline:2px solid var(--accent); background:rgba(201,162,75,.2); }
 
 .panel-backdrop { position:fixed; inset:0; background:rgba(7,20,38,.45); z-index:180; display:flex; justify-content:flex-end; }
-.admin-panel { width:100%; max-width:420px; background:var(--surface); height:100%; overflow-y:auto; box-shadow:-10px 0 34px rgba(0,0,0,.25); display:flex; flex-direction:column; }
+.admin-panel { width:100%; max-width:480px; background:var(--surface); height:100%; overflow-y:auto; box-shadow:-10px 0 34px rgba(0,0,0,.25); display:flex; flex-direction:column; }
 .panel-header { display:flex; justify-content:space-between; align-items:center; padding:16px 18px; border-bottom:1px solid var(--border); background:var(--primary); color:#F6F4EE; }
 .panel-header .icon-btn { padding:6px 10px; }
 .panel-tabs { display:flex; border-bottom:1px solid var(--border); }
 .panel-tab { flex:1; padding:12px 8px; background:none; border:none; font-weight:700; font-size:.85rem; color:var(--text-muted); border-bottom:2px solid transparent; }
 .panel-tab.active { color:var(--accent); border-bottom-color:var(--accent); }
-.panel-body { padding:18px; flex:1; }
+.panel-body { padding:18px; flex:1; overflow-y:auto; }
 .panel-pane[hidden] { display:none; }
 .q-filter { margin:12px 0; }
 .hint-text { font-size:.8rem; color:var(--text-muted); margin-top:10px; }
@@ -189,14 +202,13 @@ img { max-width:100%; display:block; }
 .admin-list-item .meta { flex:1; }
 .admin-list-item .q-text { font-size:.88rem; font-weight:600; margin:0 0 4px; }
 .admin-list-item .actions { display:flex; gap:6px; flex-shrink:0; }
-.admin-list-item .actions button { background:var(--border); border:none; border-radius:7px; padding:6px 8px; font-size:.85rem; }
-.admin-list-item .actions button.danger { background:rgba(180,84,58,.18); }
+.admin-list-item .actions button { background:var(--border); border:none; border-radius:7px; padding:6px 8px; font-size:.85rem; color:var(--text); cursor: pointer;}
+.admin-list-item .actions button.danger { background:rgba(180,84,58,.18); color: var(--terracotta); }
 .tag { display:inline-block; font-size:.68rem; text-transform:uppercase; letter-spacing:.05em; padding:3px 8px; border-radius:100px; background:var(--border); font-weight:700; margin-right:6px; }
 .member-row-photo { width:36px; height:36px; border-radius:50%; object-fit:cover; margin-right:8px; }
 .member-row { display:flex; align-items:center; }
 
-.edit-fab { position:fixed; bottom:18px; right:18px; z-index:150; background:var(--gold); color:var(--navy-deep); border:none; border-radius:100px; padding:12px 18px; font-weight:800; box-shadow:var(--shadow); display:flex; align-items:center; gap:8px; }
-.toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:var(--navy-deep); color:#fff; padding:12px 20px; border-radius:10px; font-size:.9rem; z-index:300; box-shadow:var(--shadow); }
+.toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:var(--navy-deep); color:#fff; padding:12px 20px; border-radius:10px; font-size:.9rem; z-index:300; box-shadow:var(--shadow); transition: opacity 0.3s; }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-logo { animation:none; }
@@ -208,14 +220,14 @@ img { max-width:100%; display:block; }
 
 <header class="site-header" id="siteHeader">
   <div class="container">
-    <div class="brand" id="logoTrigger" title="">
-      <img src="https://placehold.co/100x100/0B1F3A/C9A24B?text=J" alt="JCSC GK Club" class="brand-logo" id="brandLogo" />
-      <span data-t="siteShort" class="editable" data-key="siteShortText">JCSC GK Club</span>
+    <div class="brand" id="logoTrigger" title="Click multiple times for Admin Login">
+      <img src="image_bbe6d5.jpg" alt="JCSC GK Club" class="brand-logo" id="brandLogo" />
+      <span class="editable" data-key="siteShort" data-t="siteShort">JCSC GK Club</span>
     </div>
     <nav class="nav-links" id="navLinks">
-      <a href="#home" data-t="nav_home">হোম</a>
-      <a href="#about" data-t="nav_about">পরিচিতি</a>
-      <a href="#quiz" data-t="nav_quiz">কুইজ</a>
+      <a href="#home" class="editable" data-key="nav_home" data-t="nav_home">হোম</a>
+      <a href="#about" class="editable" data-key="nav_about" data-t="nav_about">পরিচিতি</a>
+      <a href="#quiz" class="editable" data-key="nav_quiz" data-t="nav_quiz">কুইজ</a>
     </nav>
     <div class="header-actions">
       <button class="icon-btn" id="langBtn">EN</button>
@@ -244,57 +256,60 @@ img { max-width:100%; display:block; }
 <section class="hero" id="home">
   <div class="container hero-inner">
     <div class="hero-badge">
-      <img src="https://placehold.co/400x400/0B1F3A/C9A24B?text=JCSC" alt="JCSC GK Club Logo" class="hero-logo" />
+      <img src="image_bbe6d5.jpg" alt="JCSC GK Club Logo" class="hero-logo" id="heroLogoImg" />
+      <div class="est-badge editable" data-key="estBadge">EST 2022</div>
     </div>
-    <span class="eyebrow editable" data-key="heroEyebrow" data-t="hero_eyebrow">জোলশিরি ক্যান্টনমেন্ট স্কুল অ্যান্ড কলেজ · EST 2022</span>
+    <span class="eyebrow editable" data-key="heroEyebrow" data-t="hero_eyebrow">জোলশিরি ক্যান্টনমেন্ট স্কুল অ্যান্ড কলেজ</span>
     <h1 class="editable" data-key="heroTitle" data-t="hero_title">প্রতিটি প্রশ্নই তোমাকে এক ধাপ এগিয়ে নেয়</h1>
     <p class="editable" data-key="heroSub" data-t="hero_sub">বিসিএস, আইএসএসবি ও ভাইভা বোর্ডের জন্য প্রস্তুতি নাও জেসিএসসি জেনারেল-নলেজ ক্লাবের নিজস্ব প্রশ্নব্যাংক দিয়ে — প্রতিদিন একটু একটু করে, প্রতিযোগিতার জন্য প্রস্তুত হও।</p>
     <div class="hero-ctas">
-      <a href="#quiz" class="btn" data-t="hero_cta">কুইজ শুরু করুন 🚀</a>
-      <a href="#about" class="btn secondary" data-t="hero_cta2">ক্লাব সম্পর্কে জানুন</a>
+      <a href="#quiz" class="btn editable" data-key="hero_cta" data-t="hero_cta">কুইজ শুরু করুন 🚀</a>
+      <a href="#about" class="btn secondary editable" data-key="hero_cta2" data-t="hero_cta2">ক্লাব সম্পর্কে জানুন</a>
     </div>
     <div class="hero-stats" id="heroStats">
-      <div class="stat"><strong id="statQuestions">0</strong><span data-t="stat_questions">প্রশ্ন</span></div>
-      <div class="stat"><strong id="statCategories">3</strong><span data-t="stat_categories">বিভাগ</span></div>
-      <div class="stat"><strong data-t="stat_members_val" class="editable" data-key="statMembersCount">১৫+</strong><span data-t="stat_members">সদস্য</span></div>
+      <div class="stat"><strong id="statQuestions">0</strong><span class="editable" data-key="stat_questions" data-t="stat_questions">প্রশ্ন</span></div>
+      <div class="stat"><strong id="statCategories">4</strong><span class="editable" data-key="stat_categories" data-t="stat_categories">বিভাগ</span></div>
+      <div class="stat"><strong class="editable" data-key="stat_members_val" data-t="stat_members_val">১৫+</strong><span class="editable" data-key="stat_members" data-t="stat_members">সদস্য</span></div>
     </div>
   </div>
 </section>
 
 <section class="section" id="about">
   <div class="container">
-    <span class="tag-eyebrow editable" data-key="aboutEyebrowText" data-t="about_eyebrow">আমাদের কথা</span>
+    <span class="tag-eyebrow editable" data-key="about_eyebrow" data-t="about_eyebrow">আমাদের কথা</span>
     <h2 class="editable" data-key="aboutTitle" data-t="club_intro_title">আমাদের ক্লাব সম্পর্কে</h2>
     <p class="lede editable" data-key="aboutBody" data-t="club_intro_body">জেসিএসসি জেনারেল-নলেজ ক্লাব শিক্ষার্থীদের বিসিএস, আইএসএসবি এবং বিভিন্ন চাকরির ভাইভা বোর্ডের জন্য প্রস্তুত করতে নিয়মিত কুইজ, আলোচনা ও প্রতিযোগিতার আয়োজন করে। প্রতিটি সেশন ডিজাইন করা হয়েছে যেন শেখা হয় আনন্দময় ও কার্যকর।</p>
 
     <div class="grid cols-3" style="margin-bottom:40px;">
       <div class="card feature-card">
         <div class="feature-icon">🎯</div>
-        <h3 class="editable" data-key="f1T" data-t="feature1_title">লক্ষ্যভিত্তিক প্রস্তুতি</h3>
-        <p class="editable" data-key="f1B" data-t="feature1_body">বিসিএস, আইএসএসবি ও ভাইভা — প্রতিটির জন্য আলাদা প্রশ্নব্যাংক।</p>
+        <h3 class="editable" data-key="feature1_title" data-t="feature1_title">লক্ষ্যভিত্তিক প্রস্তুতি</h3>
+        <p class="editable" data-key="feature1_body" data-t="feature1_body">বিসিএস, আইএসএসবি ও ভাইভা — প্রতিটির জন্য আলাদা প্রশ্নব্যাংক।</p>
       </div>
       <div class="card feature-card">
         <div class="feature-icon">🧠</div>
-        <h3 class="editable" data-key="f2T" data-t="feature2_title">ব্যাখ্যাসহ শেখা</h3>
-        <p class="editable" data-key="f2B" data-t="feature2_body">প্রতিটি উত্তরের পেছনে রয়েছে সংক্ষিপ্ত ও স্পষ্ট ব্যাখ্যা।</p>
+        <h3 class="editable" data-key="feature2_title" data-t="feature2_title">ব্যাখ্যাসহ শেখা</h3>
+        <p class="editable" data-key="feature2_body" data-t="feature2_body">প্রতিটি উত্তরের পেছনে রয়েছে সংক্ষিপ্ত ও স্পষ্ট ব্যাখ্যা।</p>
       </div>
       <div class="card feature-card">
         <div class="feature-icon">🔥</div>
-        <h3 class="editable" data-key="f3T" data-t="feature3_title">প্রতিদিনের অনুশীলন</h3>
-        <p class="editable" data-key="f3B" data-t="feature3_body">ধারাবাহিকতা বজায় রাখো, প্রতিদিন একটু একটু করে এগিয়ে যাও।</p>
+        <h3 class="editable" data-key="feature3_title" data-t="feature3_title">প্রতিদিনের অনুশীলন</h3>
+        <p class="editable" data-key="feature3_body" data-t="feature3_body">ধারাবাহিকতা বজায় রাখো, প্রতিদিন একটু একটু করে এগিয়ে যাও।</p>
       </div>
     </div>
 
-    <h3 class="members-heading editable" data-key="membersTitleText" data-t="members_title">ক্লাবের সদস্যবৃন্দ</h3>
-    <div class="grid cols-3" id="membersGrid"><!-- injected --></div>
+    <div class="members-heading">
+      <h3 class="editable" data-key="members_title" data-t="members_title">ক্লাবের প্যানেল সদস্যবৃন্দ</h3>
+    </div>
+    <div class="grid cols-4" id="membersGrid"><!-- Injected via JS --></div>
   </div>
 </section>
 
 <section class="section quiz-section" id="quiz">
   <div class="container">
-    <span class="tag-eyebrow editable" data-key="quizEyebrowText" data-t="quiz_eyebrow">যাচাই করো নিজেকে</span>
-    <h2 class="editable" data-key="quizTitleText" data-t="quiz_pick_mode">মোড বেছে নিন</h2>
-    <p class="lede editable" data-key="quizSubText" data-t="quiz_pick_sub">একটি বিভাগ বেছে নাও এবং প্রস্তুতি শুরু করো</p>
+    <span class="tag-eyebrow editable" data-key="quiz_eyebrow" data-t="quiz_eyebrow">যাচাই করো নিজেকে</span>
+    <h2 class="editable" data-key="quiz_pick_mode" data-t="quiz_pick_mode">মোড বেছে নিন</h2>
+    <p class="lede editable" data-key="quiz_pick_sub" data-t="quiz_pick_sub">একটি বিভাগ বেছে নাও এবং প্রস্তুতি শুরু করো</p>
 
     <div class="mode-grid" id="modeGrid">
       <button class="mode-card" data-mode="bcs"><span class="mode-emoji">🏛️</span><span data-t="quiz_bcs">বিসিএস</span></button>
@@ -322,8 +337,8 @@ img { max-width:100%; display:block; }
 
 <footer class="site-footer">
   <div class="container">
-    <img src="https://placehold.co/100x100/0B1F3A/C9A24B?text=J" alt="" class="footer-logo" />
-    <p class="footer-trigger editable" data-key="footerText" id="footerTrigger" data-t="footer_rights">© ২০২৬ জেসিএসসি জেনারেল-নলেজ ক্লাব। সর্বস্বত্ব সংরক্ষিত।</p>
+    <img src="image_bbe6d5.jpg" alt="" class="footer-logo" />
+    <p class="footer-trigger editable" data-key="footer_rights" id="footerTrigger" data-t="footer_rights">© ২০২৬ জেসিএসসি জেনারেল-নলেজ ক্লাব। সর্বস্বত্ব সংরক্ষিত।</p>
   </div>
 </footer>
 
@@ -359,6 +374,7 @@ img { max-width:100%; display:block; }
     </div>
 
     <div class="panel-body" id="panelBody">
+      <!-- Questions tab -->
       <div class="panel-pane" data-pane="questions">
         <button class="btn small" id="addQuestionBtn" data-t="admin_add_question">+ নতুন প্রশ্ন</button>
         <div class="q-filter">
@@ -372,25 +388,53 @@ img { max-width:100%; display:block; }
         <div id="questionList"></div>
       </div>
 
+      <!-- Members tab -->
       <div class="panel-pane" data-pane="members" hidden>
         <button class="btn small" id="addMemberBtn">+ নতুন সদস্য</button>
         <div id="memberList"></div>
       </div>
 
+      <!-- Design tab -->
       <div class="panel-pane" data-pane="design" hidden>
-        <div class="field"><label>Primary (Navy)</label><input type="color" id="colorNavy" value="#0B1F3A" /></div>
-        <div class="field"><label>Accent (Gold)</label><input type="color" id="colorGold" value="#C9A24B" /></div>
-        <div class="field"><label>Background (Paper)</label><input type="color" id="colorPaper" value="#F6F4EE" /></div>
+        <div class="field">
+          <label>Header & Footer Logo URL (ImgBB/Cloudflare)</label>
+          <input type="text" id="siteLogoUrl" placeholder="https://..." />
+        </div>
+        <div class="field">
+          <label>Large Hero Logo URL (ImgBB/Cloudflare)</label>
+          <input type="text" id="heroLogoUrl" placeholder="https://..." />
+        </div>
+        <hr style="border:0; border-top:1px solid var(--border); margin:16px 0;">
+        <div class="field">
+          <label>Primary (Navy)</label>
+          <input type="color" id="colorNavy" value="#0B1F3A" />
+        </div>
+        <div class="field">
+          <label>Accent (Gold)</label>
+          <input type="color" id="colorGold" value="#C9A24B" />
+        </div>
+        <div class="field">
+          <label>Background (Paper)</label>
+          <input type="color" id="colorPaper" value="#F7F4EC" />
+        </div>
         <button class="btn small" id="saveThemeBtn" data-t="admin_save">সংরক্ষণ করুন</button>
-        <p class="hint-text">রঙ পরিবর্তন সাথে সাথে প্রিভিউ হবে এবং Save চাপলে সবার জন্য প্রযোজ্য হবে।</p>
+        <p class="hint-text">রঙ এবং লোগো পরিবর্তন Save চাপলে সবার জন্য প্রযোজ্য হবে।</p>
       </div>
     </div>
   </aside>
 </div>
 
+<!-- Question editor modal -->
 <div class="modal-backdrop" id="questionModalBackdrop" hidden>
   <div class="modal wide">
     <h3 id="questionModalTitle">প্রশ্ন সম্পাদনা</h3>
+    
+    <div class="field">
+      <label>Media URL (Optional)</label>
+      <input id="qMediaUrl" placeholder="Paste ImgBB, Cloudflare R2, or YouTube URL here..." />
+      <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">Supports direct image URLs, .mp4 files, and YouTube video links.</p>
+    </div>
+
     <div class="two-col">
       <div>
         <div class="field"><label>বাংলা প্রশ্ন</label><textarea id="qBnText" rows="2"></textarea></div>
@@ -404,13 +448,22 @@ img { max-width:100%; display:block; }
       </div>
     </div>
     <div class="field-row">
-      <div class="field"><label>Category</label><select id="qCategory"><option value="bcs">BCS</option><option value="issb">ISSB</option><option value="viva">Viva Board</option></select></div>
-      <div class="field"><label>Topic</label><input id="qTopic" /></div>
-      <div class="field"><label>Correct option # (1-based)</label><input id="qAnswerIndex" type="number" min="1" max="6" value="1" /></div>
-    </div>
-    <div class="field">
-      <label>Media URL (Image / YouTube / .mp4)</label>
-      <input id="qMediaUrl" type="text" placeholder="Paste URL from ImgBB, YouTube, Cloudflare, etc..." />
+      <div class="field">
+        <label>Category</label>
+        <select id="qCategory">
+          <option value="bcs">BCS</option>
+          <option value="issb">ISSB</option>
+          <option value="viva">Viva Board</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Topic</label>
+        <input id="qTopic" />
+      </div>
+      <div class="field">
+        <label>Correct option # (1-based)</label>
+        <input id="qAnswerIndex" type="number" min="1" max="6" value="1" />
+      </div>
     </div>
     <div style="display:flex; gap:10px;">
       <button class="btn" id="saveQuestionBtn" data-t="admin_save">সংরক্ষণ করুন</button>
@@ -419,18 +472,27 @@ img { max-width:100%; display:block; }
   </div>
 </div>
 
+<!-- Member editor modal -->
 <div class="modal-backdrop" id="memberModalBackdrop" hidden>
   <div class="modal">
     <h3>সদস্য সম্পাদনা</h3>
     <div class="field"><label>নাম</label><input id="mName" /></div>
     <div class="field"><label>পদবি (বাংলা)</label><input id="mRoleBn" /></div>
     <div class="field"><label>Role (English)</label><input id="mRoleEn" /></div>
+    <div class="field"><label>Description / Info</label><textarea id="mDesc" rows="2"></textarea></div>
+    
+    <!-- URL Input vs Firebase Storage Upload -->
     <div class="field">
-      <label>ছবি (URL দিন অথবা ফাইল আপলোড করুন)</label>
-      <input type="text" id="mPhotoUrlInput" placeholder="Paste ImgBB/Drive URL here..." style="margin-bottom:8px;" />
+      <label>Photo URL (ImgBB, Cloudflare R2, Google Drive)</label>
+      <input id="mPhotoUrlInput" type="text" placeholder="Paste URL here for instant setup..." />
+    </div>
+    <div style="text-align:center; font-size:0.8rem; margin-bottom:8px; color:var(--text-muted);">--- OR ---</div>
+    <div class="field">
+      <label>Upload File (Uses Firebase Storage)</label>
       <input type="file" id="mPhotoFile" accept="image/*" />
       <img id="mPhotoPreview" class="photo-preview" hidden />
     </div>
+
     <div style="display:flex; gap:10px;">
       <button class="btn" id="saveMemberBtn" data-t="admin_save">সংরক্ষণ করুন</button>
       <button class="btn secondary" id="cancelMemberBtn" data-t="admin_cancel">বাতিল</button>
@@ -442,9 +504,18 @@ img { max-width:100%; display:block; }
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-import { getFirestore, doc, getDoc, setDoc, collection, getDocs, addDoc, updateDoc, deleteDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+import {
+  getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+import {
+  getFirestore, doc, getDoc, setDoc, collection, getDocs, addDoc,
+  updateDoc, deleteDoc, query, orderBy
+} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+import { 
+  getStorage, ref as storageRef, uploadBytes, getDownloadURL 
+} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-storage.js";
 
+// Uses the requested Firebase Configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCkmnxaangcODr3wwsseKgbJy_D_Q1equw",
   authDomain: "jcscgk.firebaseapp.com",
@@ -458,24 +529,27 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+const storage = getStorage(app); 
 
 const DICT = {
   bn: {
     siteShort: "JCSC GK Club",
     nav_home: "হোম", nav_about: "পরিচিতি", nav_quiz: "কুইজ",
     admin_panel: "প্যানেল", admin_edit_mode: "সম্পাদনা মোড", admin_signout: "সাইন আউট",
-    hero_eyebrow: "জোলশিরি ক্যান্টনমেন্ট স্কুল অ্যান্ড কলেজ · EST 2022",
+    hero_eyebrow: "জোলশিরি ক্যান্টনমেন্ট স্কুল অ্যান্ড কলেজ",
     hero_title: "প্রতিটি প্রশ্নই তোমাকে এক ধাপ এগিয়ে নেয়",
     hero_sub: "বিসিএস, আইএসএসবি ও ভাইভা বোর্ডের জন্য প্রস্তুতি নাও জেসিএসসি জেনারেল-নলেজ ক্লাবের নিজস্ব প্রশ্নব্যাংক দিয়ে — প্রতিদিন একটু একটু করে, প্রতিযোগিতার জন্য প্রস্তুত হও।",
     hero_cta: "কুইজ শুরু করুন 🚀", hero_cta2: "ক্লাব সম্পর্কে জানুন",
     stat_questions: "প্রশ্ন", stat_categories: "বিভাগ", stat_members: "সদস্য", stat_members_val: "১৫+",
-    about_eyebrow: "আমাদের কথা", club_intro_title: "আমাদের ক্লাব সম্পর্কে",
+    about_eyebrow: "আমাদের কথা",
+    club_intro_title: "আমাদের ক্লাব সম্পর্কে",
     club_intro_body: "জেসিএসসি জেনারেল-নলেজ ক্লাব শিক্ষার্থীদের বিসিএস, আইএসএসবি এবং বিভিন্ন চাকরির ভাইভা বোর্ডের জন্য প্রস্তুত করতে নিয়মিত কুইজ, আলোচনা ও প্রতিযোগিতার আয়োজন করে। প্রতিটি সেশন ডিজাইন করা হয়েছে যেন শেখা হয় আনন্দময় ও কার্যকর।",
     feature1_title: "লক্ষ্যভিত্তিক প্রস্তুতি", feature1_body: "বিসিএস, আইএসএসবি ও ভাইভা — প্রতিটির জন্য আলাদা প্রশ্নব্যাংক।",
     feature2_title: "ব্যাখ্যাসহ শেখা", feature2_body: "প্রতিটি উত্তরের পেছনে রয়েছে সংক্ষিপ্ত ও স্পষ্ট ব্যাখ্যা।",
     feature3_title: "প্রতিদিনের অনুশীলন", feature3_body: "ধারাবাহিকতা বজায় রাখো, প্রতিদিন একটু একটু করে এগিয়ে যাও।",
-    members_title: "ক্লাবের সদস্যবৃন্দ",
-    quiz_eyebrow: "যাচাই করো নিজেকে", quiz_pick_mode: "মোড বেছে নিন", quiz_pick_sub: "একটি বিভাগ বেছে নাও এবং প্রস্তুতি শুরু করো",
+    members_title: "ক্লাবের প্যানেল সদস্যবৃন্দ",
+    quiz_eyebrow: "যাচাই করো নিজেকে",
+    quiz_pick_mode: "মোড বেছে নিন", quiz_pick_sub: "একটি বিভাগ বেছে নাও এবং প্রস্তুতি শুরু করো",
     quiz_bcs: "বিসিএস", quiz_issb: "আইএসএসবি", quiz_viva: "ভাইভা বোর্ড", quiz_mixed: "মিশ্র",
     quiz_score: "স্কোর", quiz_exit: "বন্ধ করো", quiz_retry: "আবার চেষ্টা করো",
     quiz_correct: "চমৎকার! সঠিক উত্তর 🎉", quiz_incorrect: "ঠিক হয়নি — চলো ব্যাখ্যাটা দেখি",
@@ -483,25 +557,30 @@ const DICT = {
     footer_rights: "© ২০২৬ জেসিএসসি জেনারেল-নলেজ ক্লাব। সর্বস্বত্ব সংরক্ষিত।",
     admin_login: "অ্যাডমিন লগইন", admin_email: "ইমেইল", admin_password: "পাসওয়ার্ড",
     admin_signin: "সাইন ইন", admin_cancel: "বাতিল",
-    admin_questions: "প্রশ্নসমূহ", admin_members: "সদস্যরা", admin_add_question: "+ নতুন প্রশ্ন", admin_save: "সংরক্ষণ করুন",
-    result_great: "দারুণ প্রস্তুতি! এভাবেই এগিয়ে যাও।", result_good: "ভালো করেছো — আরেকটু অনুশীলনে আরও শাণিত হবে।", result_retry: "চিন্তা নেই, ব্যাখ্যাগুলো আবার পড়ে আরেকবার চেষ্টা করো।",
+    admin_questions: "প্রশ্নসমূহ", admin_members: "সদস্যরা", admin_add_question: "+ নতুন প্রশ্ন",
+    admin_save: "সংরক্ষণ করুন",
+    result_great: "দারুণ প্রস্তুতি! এভাবেই এগিয়ে যাও।",
+    result_good: "ভালো করেছো — আরেকটু অনুশীলনে আরও শাণিত হবে।",
+    result_retry: "চিন্তা নেই, ব্যাখ্যাগুলো আবার পড়ে আরেকবার চেষ্টা করো।",
   },
   en: {
     siteShort: "JCSC GK Club",
     nav_home: "Home", nav_about: "About", nav_quiz: "Quiz",
     admin_panel: "Panel", admin_edit_mode: "Edit Mode", admin_signout: "Sign out",
-    hero_eyebrow: "Jolshiri Cantonment School and College · EST 2022",
+    hero_eyebrow: "Jolshiri Cantonment School and College",
     hero_title: "Every question moves you one step forward",
-    hero_sub: "Prepare for BCS, ISSB, and Viva Boards with JCSC General-Knowledge Club's own question bank.",
+    hero_sub: "Prepare for BCS, ISSB, and Viva Boards with JCSC General-Knowledge Club's own question bank — a little every day, ready for competition.",
     hero_cta: "Start a Quiz 🚀", hero_cta2: "Learn about the club",
     stat_questions: "Questions", stat_categories: "Categories", stat_members: "Members", stat_members_val: "15+",
-    about_eyebrow: "Our story", club_intro_title: "About Our Club",
-    club_intro_body: "JCSC General-Knowledge Club runs regular quizzes to prepare students for viva boards.",
+    about_eyebrow: "Our story",
+    club_intro_title: "About Our Club",
+    club_intro_body: "JCSC General-Knowledge Club runs regular quizzes, discussions, and competitions to prepare students for BCS, ISSB, and various job viva boards. Every session is designed to make learning both enjoyable and effective.",
     feature1_title: "Goal-focused prep", feature1_body: "Separate question banks for BCS, ISSB, and Viva Boards.",
     feature2_title: "Learn with explanations", feature2_body: "Every answer comes with a short, clear explanation.",
     feature3_title: "Daily practice", feature3_body: "Stay consistent — a little progress every single day.",
-    members_title: "Club Members",
-    quiz_eyebrow: "Test yourself", quiz_pick_mode: "Choose a mode", quiz_pick_sub: "Pick a category and start preparing",
+    members_title: "Club Panel Members",
+    quiz_eyebrow: "Test yourself",
+    quiz_pick_mode: "Choose a mode", quiz_pick_sub: "Pick a category and start preparing",
     quiz_bcs: "BCS", quiz_issb: "ISSB", quiz_viva: "Viva Board", quiz_mixed: "Mixed",
     quiz_score: "Score", quiz_exit: "Exit", quiz_retry: "Try again",
     quiz_correct: "Great — that's correct 🎉", quiz_incorrect: "Not quite — let's see why",
@@ -509,15 +588,19 @@ const DICT = {
     footer_rights: "© 2026 JCSC General-Knowledge Club. All rights reserved.",
     admin_login: "Admin Login", admin_email: "Email", admin_password: "Password",
     admin_signin: "Sign in", admin_cancel: "Cancel",
-    admin_questions: "Questions", admin_members: "Members", admin_add_question: "+ New question", admin_save: "Save",
-    result_great: "Excellent prep — keep this up!", result_good: "Good work — a bit more practice will sharpen this further.", result_retry: "No worries — review the explanations and try again.",
+    admin_questions: "Questions", admin_members: "Members", admin_add_question: "+ New question",
+    admin_save: "Save",
+    result_great: "Excellent prep — keep this up!",
+    result_good: "Good work — a bit more practice will sharpen this further.",
+    result_retry: "No worries — review the explanations and try again.",
   },
 };
 
 let lang = localStorage.getItem("jcsc_lang") || "bn";
-let theme = localStorage.getItem("jcsc_theme") || "dark"; // Defaulting to dark
+let theme = localStorage.getItem("jcsc_theme") || "dark";
 
 function t(key) { return DICT[lang]?.[key] ?? key; }
+
 function applyTranslations() {
   document.documentElement.lang = lang;
   document.querySelectorAll("[data-t]").forEach((el) => {
@@ -549,6 +632,7 @@ document.getElementById("langBtn").addEventListener("click", () => {
   applyTranslations();
   renderQuestionListPane();
   if (currentQuiz) renderCurrentQuestion();
+  renderMembers();
 });
 
 document.getElementById("hamburgerBtn").addEventListener("click", () => {
@@ -564,8 +648,53 @@ function showToast(msg) {
   const el = document.getElementById("toast");
   el.textContent = msg;
   el.hidden = false;
+  el.style.opacity = '1';
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => (el.hidden = true), 3200);
+  toastTimer = setTimeout(() => {
+      el.style.opacity = '0'; 
+      setTimeout(()=>el.hidden = true, 300);
+  }, 3200);
+}
+
+let audioCtx = null;
+function playSound(type) {
+    try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        osc.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        const now = audioCtx.currentTime;
+
+        if (type === 'correct') {
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(600, now);
+            osc.frequency.exponentialRampToValueAtTime(1200, now + 0.1);
+            gainNode.gain.setValueAtTime(0.3, now);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+            osc.start(now);
+            osc.stop(now + 0.2);
+        } else if (type === 'wrong') {
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(150, now);
+            osc.frequency.exponentialRampToValueAtTime(100, now + 0.2);
+            gainNode.gain.setValueAtTime(0.2, now);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+            osc.start(now);
+            osc.stop(now + 0.3);
+        } else if (type === 'finish') {
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(400, now);
+            osc.frequency.setValueAtTime(500, now + 0.1);
+            osc.frequency.setValueAtTime(600, now + 0.2);
+            osc.frequency.setValueAtTime(800, now + 0.3);
+            gainNode.gain.setValueAtTime(0.3, now);
+            gainNode.gain.linearRampToValueAtTime(0, now + 0.6);
+            osc.start(now);
+            osc.stop(now + 0.6);
+        }
+    } catch(e) { console.warn("Audio Context not supported"); }
 }
 
 const SEED_QUESTIONS = [
@@ -573,15 +702,60 @@ const SEED_QUESTIONS = [
     bn:{q:"বাংলাদেশের সংবিধান কার্যকর হয় কোন তারিখে?", options:["৪ নভেম্বর ১৯৭২","১৬ ডিসেম্বর ১৯৭২","২৬ মার্চ ১৯৭১","১৭ এপ্রিল ১৯৭১"], explanation:"গণপরিষদে সংবিধান গৃহীত হয় ৪ নভেম্বর ১৯৭২ এবং তা কার্যকর হয় ১৬ ডিসেম্বর ১৯৭২ থেকে।"},
     en:{q:"On which date did the Constitution of Bangladesh come into effect?", options:["4 November 1972","16 December 1972","26 March 1971","17 April 1971"], explanation:"The Constitution was adopted on 4 November 1972 and took effect on 16 December 1972."},
     answerIndex:1 },
-  { id:"bcs-002", category:"bcs", topic:"Geography", mediaUrl: "https://placehold.co/600x400/0B1F3A/C9A24B?text=River+Map",
+  { id:"bcs-002", category:"bcs", topic:"Geography",
     bn:{q:"বাংলাদেশের দীর্ঘতম নদী কোনটি?", options:["পদ্মা","মেঘনা","যমুনা","কর্ণফুলী"], explanation:"দৈর্ঘ্যের বিচারে মেঘনা নদীকে বাংলাদেশের দীর্ঘতম নদী হিসেবে গণ্য করা হয়।"},
     en:{q:"Which is the longest river in Bangladesh?", options:["Padma","Meghna","Jamuna","Karnaphuli"], explanation:"By length, the Meghna is generally considered the longest river in Bangladesh."},
     answerIndex:1 },
-  { id:"bcs-003", category:"bcs", topic:"International Affairs",
-    bn:{q:"জাতিসংঘের সদর দপ্তর কোথায় অবস্থিত?", options:["জেনেভা","নিউইয়র্ক","প্যারিস","ভিয়েনা"], explanation:"জাতিসংঘের সদর দপ্তর যুক্তরাষ্ট্রের নিউইয়র্ক শহরে অবস্থিত।"},
-    en:{q:"Where is the UN headquarters located?", options:["Geneva","New York","Paris","Vienna"], explanation:"The UN Headquarters is located in New York City, USA."},
+  { id:"bcs-004", category:"bcs", topic:"History", mediaUrl: "",
+    bn:{q:"অবিভক্ত বাংলার প্রথম মুখ্যমন্ত্রী কে ছিলেন?", options:["শেরে বাংলা এ. কে. ফজলুল হক","খাজা নাজিমুদ্দিন","এইচ. এস. সোহরাওয়ার্দী","নবাব সলিমুল্লাহ"], explanation:"অবিভক্ত বাংলার প্রথম মুখ্যমন্ত্রী ছিলেন শেরে বাংলা এ. কে. ফজলুল হক (১৯৩৭ সাল)।"},
+    en:{q:"Who was the first Chief Minister of undivided Bengal?", options:["Sher-e-Bangla A.K. Fazlul Huq","Khawaja Nazimuddin","H.S. Suhrawardy","Nawab Salimullah"], explanation:"Sher-e-Bangla A.K. Fazlul Huq became the first Chief Minister of undivided Bengal in 1937."},
+    answerIndex:0 },
+  { id:"bcs-005", category:"bcs", topic:"Liberation War",
+    bn:{q:"মুক্তিযুদ্ধে বাংলাদেশকে কয়টি সেক্টরে ভাগ করা হয়েছিল?", options:["৭টি","৯টি","১১টি","১৫টি"], explanation:"মুক্তিযুদ্ধ পরিচালনার সুবিধার্থে সমগ্র বাংলাদেশকে ১১টি সেক্টরে ভাগ করা হয়েছিল।"},
+    en:{q:"How many sectors was Bangladesh divided into during the Liberation War?", options:["7","9","11","15"], explanation:"For administrative and military convenience, Bangladesh was divided into 11 sectors during the Liberation War."},
+    answerIndex:2 },
+  { id:"issb-001", category:"issb", topic:"Defence GK",
+    bn:{q:"বাংলাদেশ সেনাবাহিনীর সদর দপ্তর কোথায় অবস্থিত?", options:["চট্টগ্রাম","ঢাকা সেনানিবাস","যশোর সেনানিবাস","খুলনা"], explanation:"বাংলাদেশ সেনাবাহিনীর সদর দপ্তর ঢাকা সেনানিবাসে অবস্থিত।"},
+    en:{q:"Where is the Bangladesh Army Headquarters located?", options:["Chattogram","Dhaka Cantonment","Jashore Cantonment","Khulna"], explanation:"The Bangladesh Army Headquarters is located in Dhaka Cantonment."},
+    answerIndex:1 },
+  { id:"issb-002", category:"issb", topic:"Process",
+    bn:{q:"ISSB পরীক্ষায় সাধারণত কতদিন সময় লাগে?", options:["১ দিন","২ দিন","৪ দিন","৭ দিন"], explanation:"ISSB এর সম্পূর্ণ প্রক্রিয়া সাধারণত ৪ দিন ধরে চলে — সাইকোলজিক্যাল টেস্ট, GTO টাস্ক ও ইন্টারভিউসহ।"},
+    en:{q:"How many days does a typical ISSB process usually take?", options:["1 day","2 days","4 days","7 days"], explanation:"A full ISSB process typically spans 4 days: psychological tests, GTO tasks, and interviews."},
+    answerIndex:2 },
+  { id:"issb-003", category:"issb", topic:"Psychological",
+    bn:{q:"আইএসএসবি-তে WAT (Word Association Test) এর উদ্দেশ্য কী?", options:["ইংরেজি ব্যাকরণ যাচাই","অবচেতন মনের চিন্তা বিশ্লেষণ","স্মৃতিশক্তি যাচাই","হাতের লেখা পরীক্ষা"], explanation:"WAT এর মাধ্যমে মূলত প্রার্থীর অবচেতন মনের চিন্তা ও মনোভাব বিশ্লেষণ করা হয়।"},
+    en:{q:"What is the purpose of WAT (Word Association Test) in ISSB?", options:["Checking English grammar","Analyzing subconscious thoughts","Testing memory","Checking handwriting"], explanation:"WAT is primarily designed to analyze the candidate's subconscious thoughts and attitudes."},
+    answerIndex:1 },
+  { id:"issb-004", category:"issb", topic:"Psychological Test",
+    bn:{q:"ISSB-তে PGT এর পূর্ণরূপ কী?", options:["Personal Group Task","Progressive Group Task","Primary General Task","Psychological Group Test"], explanation:"PGT মানে Progressive Group Task, যেখানে একটি দলকে ধাপে ধাপে বাধা অতিক্রম করতে হয়।"},
+    en:{q:"What does PGT stand for in ISSB?", options:["Personal Group Task","Progressive Group Task","Primary General Task","Psychological Group Test"], explanation:"PGT stands for Progressive Group Task, where a group navigates a series of obstacles."},
+    answerIndex:1 },
+  { id:"viva-001", category:"viva", topic:"Self Introduction",
+    bn:{q:"ভাইভা বোর্ডে 'নিজের সম্পর্কে বলুন' প্রশ্নের সর্বোত্তম কৌশল কী?", options:["জীবনবৃত্তান্ত হুবহু মুখস্থ বলা","সংক্ষেপে শিক্ষা, দক্ষতা ও লক্ষ্য তুলে ধরা","শুধু পারিবারিক পরিচয় দেওয়া","কোনো উত্তর ঘন ঘন এড়ানো"], explanation:"সংক্ষেপে শিক্ষাগত যোগ্যতা, প্রাসঙ্গিক দক্ষতা ও ক্যারিয়ার লক্ষ্য স্বাভাবিকভাবে তুলে ধরাই কার্যকর — মুখস্থ বক্তৃতার মতো শোনানো উচিত নয়।"},
+    en:{q:"What's the best approach when a viva board asks 'Tell us about yourself'?", options:["Recite your CV word for word","Briefly cover education, skills, and goals","Only state family background","Avoid answering directly"], explanation:"A concise, natural summary of education, relevant skills, and career goals works best — not a memorized recitation."},
+    answerIndex:1 },
+  { id:"viva-002", category:"viva", topic:"Body Language",
+    bn:{q:"ভাইভা বোর্ডে প্রবেশের সময় কোন আচরণটি সবচেয়ে গ্রহণযোগ্য?", options:["মাথা নিচু করে দ্রুত বসে পড়া","অনুমতি নিয়ে বিনীতভাবে সালাম/শুভেচ্ছা জানিয়ে বসা","কোনো কিছু না বলে বসে পড়া","হাসিমুখে না তাকিয়ে কথা বলা"], explanation:"বোর্ডে প্রবেশের সময় অনুমতি নিয়ে বিনয়ের সাথে শুভেচ্ছা জানিয়ে বসা পেশাদারিত্ব ও আত্মবিশ্বাস প্রকাশ করে।"},
+    en:{q:"What's the most appropriate behavior when entering a viva board room?", options:["Rush in and sit without acknowledgment","Greet politely, ask permission, then sit","Sit down without saying anything","Speak without making eye contact"], explanation:"A polite greeting and asking permission to sit shows both professionalism and confidence."},
+    answerIndex:1 },
+  { id:"viva-003", category:"viva", topic:"Career Goal",
+    bn:{q:"'আপনি কেন এই চাকরিতে যোগ দিতে চান?' - এর আদর্শ উত্তর কেমন হওয়া উচিত?", options:["শুধু ভালো বেতনের কথা বলা","কোম্পানির/প্রতিষ্ঠানের লক্ষ্যের সাথে নিজের দক্ষতার মিল দেখানো","বেকারত্বের কথা বলা","জানি না বলা"], explanation:"প্রতিষ্ঠানের লক্ষ্য ও কাজের পরিবেশের সাথে নিজের দক্ষতা ও ক্যারিয়ার প্ল্যানের সামঞ্জস্য তুলে ধরাই সবচেয়ে ভালো কৌশল।"},
+    en:{q:"What is the ideal way to answer 'Why do you want to join this job?'", options:["Only mention a good salary","Align your skills with the organization's goals","Talk about being unemployed","Say 'I don't know'"], explanation:"The best strategy is to show how your skills, passion, and career plans align with the organization's goals."},
     answerIndex:1 }
 ];
+
+function defaultMembers() {
+  return [
+    { id:"m1", name:"A sir", roleBn:"ক্লাব মডারেটর", roleEn:"Club Moderator", desc:"", order:1, photoUrl:"" },
+    { id:"m2", name:"B", roleBn:"প্রেসিডেন্ট", roleEn:"President", desc:"Driving our strategic vision for General Knowledge and career development.", order:2, photoUrl:"" },
+    { id:"m3", name:"C", roleBn:"ভাইস প্রেসিডেন্ট", roleEn:"Vice President", desc:"Spearheading our upcoming coding workshops.", order:3, photoUrl:"" },
+    { id:"m4", name:"D", roleBn:"জেনারেল সেক্রেটারি", roleEn:"General Secretary", desc:"Overseeing project development and digital architecture.", order:4, photoUrl:"" },
+    { id:"m5", name:"E", roleBn:"ট্রেজারার", roleEn:"Treasurer", desc:"Managing Funds for building dreams to come in real.", order:5, photoUrl:"" },
+    { id:"m6", name:"F", roleBn:"মিডিয়া ও প্রকাশনা সম্পাদক", roleEn:"Media & Publication Secretary", desc:"Capturing our journey and scaling our digital footprint.", order:6, photoUrl:"" },
+    { id:"m7", name:"G", roleBn:"সাংগঠনিক সম্পাদক", roleEn:"Organizing Secretary", desc:"Organizing the projects and project makers.", order:7, photoUrl:"" },
+    { id:"m8", name:"H", roleBn:"যুগ্ম সম্পাদক (তথ্য)", roleEn:"Joint Secretary (Info)", desc:"Gathering Information about Workshop and Olympiads.", order:8, photoUrl:"" }
+  ];
+}
 
 let allQuestions = [...SEED_QUESTIONS];
 let allMembers = [];
@@ -592,6 +766,8 @@ async function loadSiteContent() {
     const snap = await getDoc(doc(db, "content", "site"));
     if (snap.exists()) {
       siteContent = snap.data();
+      
+      // Load Custom Texts
       Object.entries(siteContent.text || {}).forEach(([key, val]) => {
         const el = document.querySelector(`.editable[data-key="${key}"]`);
         if (el && val) {
@@ -599,16 +775,24 @@ async function loadSiteContent() {
           if (val.en) el.setAttribute("data-custom-en", val.en);
         }
       });
-      if (siteContent.theme) applyThemeColors(siteContent.theme, false);
-      if (siteContent.heroLogoUrl) {
-        document.getElementById("brandLogo").src = siteContent.heroLogoUrl;
-        document.querySelectorAll(".footer-logo").forEach(img => img.src = siteContent.heroLogoUrl);
+      
+      // Load Custom Themes & Logos
+      if (siteContent.theme) applyThemeColors(siteContent.theme, true);
+      
+      if (siteContent.siteLogoUrl) {
+          document.getElementById("brandLogo").src = siteContent.siteLogoUrl;
+          document.getElementById("favicon").href = siteContent.siteLogoUrl;
+          const footerLogo = document.querySelector(".footer-logo");
+          if(footerLogo) footerLogo.src = siteContent.siteLogoUrl;
+          document.getElementById("siteLogoUrl").value = siteContent.siteLogoUrl;
       }
-      if (siteContent.heroLargeLogoUrl) {
-        document.querySelector(".hero-logo").src = siteContent.heroLargeLogoUrl;
+      
+      if (siteContent.heroLogoUrl) {
+          document.getElementById("heroLogoImg").src = siteContent.heroLogoUrl;
+          document.getElementById("heroLogoUrl").value = siteContent.heroLogoUrl;
       }
     }
-  } catch (e) { console.warn("Content load failed, using defaults", e); }
+  } catch (e) { console.warn("Content load failed", e); }
   applyTranslations();
 }
 
@@ -630,6 +814,11 @@ async function loadMembers() {
       allMembers = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
     } else {
       allMembers = defaultMembers();
+      // Auto-sync defaults to database so they persist and show in Admin panel
+      allMembers.forEach(async (m) => {
+         const { id, ...data } = m;
+         await setDoc(doc(db, "members", id), data);
+      });
     }
   } catch (e) {
     allMembers = defaultMembers();
@@ -637,18 +826,6 @@ async function loadMembers() {
   renderMembers();
 }
 
-function defaultMembers() {
-  return [
-    { id:"m1", name:"A sir", roleBn:"ক্লাব মডারেটর", roleEn:"Club Moderator", order:1, photoUrl:"" },
-    { id:"m2", name:"B", roleBn:"প্রেসিডেন্ট", roleEn:"President", order:2, photoUrl:"" },
-    { id:"m3", name:"C", roleBn:"ভাইস প্রেসিডেন্ট", roleEn:"Vice President", order:3, photoUrl:"" },
-    { id:"m4", name:"D", roleBn:"সাধারণ সম্পাদক", roleEn:"General Secretary", order:4, photoUrl:"" },
-    { id:"m5", name:"E", roleBn:"কোষাধ্যক্ষ", roleEn:"Treasurer", order:5, photoUrl:"" },
-    { id:"m6", name:"F", roleBn:"মিডিয়া ও প্রকাশনা সম্পাদক", roleEn:"Media & Publication Secretary", order:6, photoUrl:"" },
-    { id:"m7", name:"G", roleBn:"সাংগঠনিক সম্পাদক", roleEn:"Organizing Secretary", order:7, photoUrl:"" },
-    { id:"m8", name:"H", roleBn:"যুগ্ম সম্পাদক (তথ্য)", roleEn:"Joint Secretary (Information)", order:8, photoUrl:"" },
-  ];
-}
 function renderMembers() {
   const grid = document.getElementById("membersGrid");
   grid.innerHTML = "";
@@ -657,9 +834,10 @@ function renderMembers() {
     card.className = "card member-card";
     const initials = (m.name || "?").split(" ").map(s=>s[0]).slice(0,2).join("");
     card.innerHTML = `
-      ${m.photoUrl ? `<img class="member-photo" src="${m.photoUrl}" alt="${m.name}">` : `<div class="member-photo" style="display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--accent);">${initials}</div>`}
+      ${m.photoUrl ? `<img class="member-photo" src="${m.photoUrl}" alt="${m.name}">` : `<div class="member-photo" style="display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--accent); font-size:1.5rem;">${initials}</div>`}
       <p class="member-name">${m.name}</p>
       <p class="member-role">${lang === "bn" ? (m.roleBn||"") : (m.roleEn||m.roleBn||"")}</p>
+      ${m.desc ? `<p class="member-desc">${m.desc}</p>` : ''}
     `;
     grid.appendChild(card);
   });
@@ -671,42 +849,15 @@ async function loadQuestions() {
     if (!snap.empty) {
       allQuestions = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
     }
-  } catch (e) { console.warn("Using seed questions (Firestore not reachable yet)", e); }
+  } catch (e) { console.warn("Using seed questions", e); }
   document.getElementById("statQuestions").textContent = allQuestions.length;
   renderQuestionListPane();
-}
-
-let audioCtx = null;
-function initAudio() {
-  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  if (audioCtx.state === 'suspended') audioCtx.resume();
-}
-function playTone(freq, type, duration, vol=0.08) {
-  if(!audioCtx) return;
-  const osc = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
-  osc.type = type;
-  osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-  gain.gain.setValueAtTime(vol, audioCtx.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
-  osc.connect(gain);
-  gain.connect(audioCtx.destination);
-  osc.start();
-  osc.stop(audioCtx.currentTime + duration);
-}
-function playCorrectSound() { playTone(600, 'sine', 0.1); setTimeout(()=>playTone(800, 'sine', 0.15), 100); }
-function playWrongSound() { playTone(200, 'sawtooth', 0.3); }
-function playFinishSound() {
-  [300, 400, 500, 600, 800].forEach((f, i) => setTimeout(() => playTone(f, 'square', 0.1), i * 100));
 }
 
 let currentQuiz = null;
 
 document.querySelectorAll(".mode-card").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    initAudio(); // Required to unlock sound on first interaction
-    startQuiz(btn.dataset.mode);
-  });
+  btn.addEventListener("click", () => startQuiz(btn.dataset.mode));
 });
 
 function shuffle(arr) {
@@ -719,6 +870,9 @@ function shuffle(arr) {
 }
 
 function startQuiz(mode) {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+
   const pool = mode === "mixed" ? allQuestions : allQuestions.filter((q) => q.category === mode);
   if (!pool.length) { showToast(lang==="bn"?"এই বিভাগে এখনো কোনো প্রশ্ন নেই।":"No questions in this category yet."); return; }
   currentQuiz = { pool: shuffle(pool), index: 0, score: 0, answered: false };
@@ -740,27 +894,30 @@ function renderProgressStripes() {
   });
 }
 
+function getMediaHTML(url) {
+    if(!url) return '';
+    try {
+        if(url.includes('youtube.com') || url.includes('youtu.be')) {
+            let vid = url.includes('v=') ? url.split('v=')[1].split('&')[0] : url.split('/').pop();
+            return `<div class="media-container"><iframe width="100%" height="250" src="https://www.youtube.com/embed/${vid}" frameborder="0" allowfullscreen></iframe></div>`;
+        } else if (url.match(/\.(mp4|webm|ogg)$/i)) {
+            return `<div class="media-container"><video width="100%" height="250" controls><source src="${url}"></video></div>`;
+        } else {
+            return `<div class="media-container" style="background:transparent;"><img src="${url}" alt="Quiz Media" style="width:100%; max-height:280px; object-fit:contain;" /></div>`;
+        }
+    } catch(e) { return ''; }
+}
+
 function renderCurrentQuestion() {
   const q = currentQuiz.pool[currentQuiz.index];
   const card = document.getElementById("questionCard");
   const data = q[lang] || q.bn;
   
-  let mediaHTML = "";
-  if (q.mediaUrl) {
-    const url = q.mediaUrl;
-    if (url.includes("youtube.com") || url.includes("youtu.be")) {
-      let vidId = url.split("v=")[1]?.split("&")[0] || url.split("youtu.be/")[1]?.split("?")[0];
-      mediaHTML = `<iframe width="100%" height="215" src="https://www.youtube.com/embed/${vidId}" frameborder="0" allowfullscreen style="border-radius:8px; margin-bottom:14px;"></iframe>`;
-    } else if (url.match(/\.(mp4|webm|ogg)$/i)) {
-      mediaHTML = `<video width="100%" controls style="border-radius:8px; margin-bottom:14px; background:#000;"><source src="${url}"></video>`;
-    } else {
-      mediaHTML = `<img src="${url}" alt="Media" style="width:100%; max-height:250px; object-fit:contain; border-radius:8px; margin-bottom:14px;" onerror="this.style.display='none'"/>`;
-    }
-  }
+  const mediaStr = getMediaHTML(q.mediaUrl);
 
   card.innerHTML = `
     <div class="question-topic">${labelForCategory(q.category)} · ${q.topic || ""}</div>
-    ${mediaHTML}
+    ${mediaStr}
     <p class="question-text">${data.q}</p>
     <div id="optionsWrap"></div>
     <div id="explanationSlot"></div>
@@ -786,20 +943,21 @@ function answerQuestion(choiceIndex) {
   const q = currentQuiz.pool[currentQuiz.index];
   const data = q[lang] || q.bn;
   const buttons = document.querySelectorAll("#optionsWrap .option-btn");
+  
+  const correct = choiceIndex === q.answerIndex;
+  
   buttons.forEach((b, i) => {
     b.disabled = true;
     if (i === q.answerIndex) b.classList.add("correct");
     else if (i === choiceIndex) b.classList.add("incorrect");
   });
-  const correct = choiceIndex === q.answerIndex;
-  
-  // Play appropriate sound!
+
   if (correct) { 
-    playCorrectSound();
-    currentQuiz.score++; 
-    document.getElementById("liveScore").textContent = currentQuiz.score; 
+      currentQuiz.score++; 
+      document.getElementById("liveScore").textContent = currentQuiz.score; 
+      playSound('correct');
   } else {
-    playWrongSound();
+      playSound('wrong');
   }
 
   const slot = document.getElementById("explanationSlot");
@@ -817,7 +975,7 @@ function answerQuestion(choiceIndex) {
 }
 
 function finishQuiz() {
-  playFinishSound();
+  playSound('finish');
   document.getElementById("quizArea").hidden = true;
   document.getElementById("resultArea").hidden = false;
   const total = currentQuiz.pool.length;
@@ -860,15 +1018,13 @@ document.getElementById("loginSubmitBtn").addEventListener("click", async () => 
     await signInWithEmailAndPassword(auth, email, pass);
     document.getElementById("loginBackdrop").hidden = true;
   } catch (e) {
-    errEl.textContent = "লগইন ব্যর্থ হয়েছে: " + e.code; // Shows exact Firebase error!
+    errEl.textContent = lang==="bn" ? "লগইন ব্যর্থ হয়েছে — ইমেইল/পাসওয়ার্ড যাচাই করো।" : `Error: ${e.code}`;
     errEl.hidden = false;
   }
 });
 
-let isAdmin = false;
 onAuthStateChanged(auth, async (user) => {
   if (!user) { setAdminUI(false); return; }
-  isAdmin = true;
   document.getElementById("adminEmail").textContent = user.email;
   setAdminUI(true);
 });
@@ -886,7 +1042,6 @@ document.getElementById("signOutBtn").addEventListener("click", async () => {
 document.getElementById("toggleEditModeBtn").addEventListener("click", () => {
   const on = document.body.classList.toggle("edit-on");
   document.querySelectorAll(".editable").forEach((el) => (el.contentEditable = on ? "true" : "false"));
-  setupImageEditing(on);
   if (on) showToast(lang==="bn" ? "সম্পাদনা মোড চালু — যেকোনো লেখায় ক্লিক করে বদলাও।" : "Edit mode on — click any text to change it.");
 });
 
@@ -897,64 +1052,11 @@ document.querySelectorAll(".editable").forEach((el) => {
     if (!key) return;
     el.setAttribute("data-custom-" + lang, el.textContent);
     try {
-      const path = `text.${key}.${lang}`;
       await setDoc(doc(db, "content", "site"), { text: { [key]: { [lang]: el.textContent } } }, { merge: true });
       showToast(lang==="bn" ? "সংরক্ষিত হয়েছে" : "Saved");
     } catch (e) { showToast(lang==="bn" ? "সংরক্ষণ ব্যর্থ" : "Save failed"); }
   });
 });
-
-function setupImageEditing(on) {
-  const targets = [document.getElementById("brandLogo"), document.querySelector(".hero-logo")];
-  targets.forEach((img) => {
-    img.style.cursor = on ? "pointer" : "default";
-    img.title = on ? (lang==="bn" ? "ছবি পরিবর্তন করতে ক্লিক করো" : "Click to replace image") : "";
-    img.onclick = on ? () => triggerImageReplace(img) : null;
-  });
-}
-
-function triggerImageReplace(imgEl) {
-  const customUrl = prompt(
-    lang==="bn" 
-      ? "ছবির ডাইরেক্ট URL দিন (ImgBB, Drive, Cloudflare) অথবা ফাঁকা রেখে OK চাপলে ফাইল আপলোড অপশন আসবে:" 
-      : "Enter direct image URL (ImgBB, Drive, etc) OR leave blank and click OK to upload a file:", 
-    ""
-  );
-  
-  if (customUrl) { saveImageToDB(imgEl, customUrl); return; }
-
-  const input = document.createElement("input");
-  input.type = "file"; input.accept = "image/*";
-  input.onchange = async () => {
-    const file = input.files[0];
-    if (!file) return;
-    showToast(lang==="bn" ? "আপলোড হচ্ছে..." : "Uploading...");
-    try {
-      const url = await uploadImage(file, "site");
-      saveImageToDB(imgEl, url);
-    } catch (e) { showToast(lang==="bn" ? "আপলোড ব্যর্থ" : "Upload failed"); }
-  };
-  input.click();
-}
-
-async function saveImageToDB(imgEl, url) {
-  imgEl.src = url;
-  const isLarge = imgEl.classList.contains("hero-logo");
-  const field = isLarge ? "heroLargeLogoUrl" : "heroLogoUrl";
-  await setDoc(doc(db, "content", "site"), { [field]: url }, { merge: true });
-  if (!isLarge) document.querySelectorAll(".footer-logo").forEach((f) => (f.src = url));
-  showToast(lang==="bn" ? "ছবি আপডেট হয়েছে" : "Image updated");
-}
-
-async function uploadImage(file, folder) {
-  // Uses base64 fallback to database if no remote storage provided securely.
-  return await new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-}
 
 document.getElementById("openPanelBtn").addEventListener("click", () => (document.getElementById("panelBackdrop").hidden = false));
 document.getElementById("closePanelBtn").addEventListener("click", () => (document.getElementById("panelBackdrop").hidden = true));
@@ -1008,8 +1110,8 @@ function openQuestionModal(q) {
   document.getElementById("qEnExplanation").value = q?.en?.explanation || "";
   document.getElementById("qCategory").value = q?.category || "bcs";
   document.getElementById("qTopic").value = q?.topic || "";
-  document.getElementById("qAnswerIndex").value = (q?.answerIndex ?? 0) + 1;
   document.getElementById("qMediaUrl").value = q?.mediaUrl || "";
+  document.getElementById("qAnswerIndex").value = (q?.answerIndex ?? 0) + 1;
   document.getElementById("questionModalBackdrop").hidden = false;
 }
 document.getElementById("cancelQuestionBtn").addEventListener("click", () => (document.getElementById("questionModalBackdrop").hidden = true));
@@ -1043,7 +1145,7 @@ document.getElementById("saveQuestionBtn").addEventListener("click", async () =>
     document.getElementById("questionModalBackdrop").hidden = true;
     document.getElementById("statQuestions").textContent = allQuestions.length;
     renderQuestionListPane();
-  } catch (e) { showToast(lang==="bn" ? "সংরক্ষণ ব্যর্থ হয়েছে" : "Save failed"); }
+  } catch (e) { showToast(lang==="bn" ? "সংরক্ষণ ব্যর্থ হয়েছে" : "Save failed"); console.error(e);}
 });
 
 async function deleteQuestionById(q) {
@@ -1082,14 +1184,18 @@ function renderMemberListPane() {
     list.appendChild(item);
   });
 }
+
 async function reorderMember(idx, dir) {
   const newIdx = idx + dir;
   if (newIdx < 0 || newIdx >= allMembers.length) return;
   [allMembers[idx], allMembers[newIdx]] = [allMembers[newIdx], allMembers[idx]];
   allMembers.forEach((m, i) => (m.order = i + 1));
-  try { await Promise.all(allMembers.map((m) => !m.id.startsWith("__local") && updateDoc(doc(db, "members", m.id), { order: m.order }))); } catch (e) {}
+  try {
+    await Promise.all(allMembers.map((m) => !m.id.startsWith("__local") && updateDoc(doc(db, "members", m.id), { order: m.order })));
+  } catch (e) {}
   renderMemberListPane(); renderMembers();
 }
+
 document.getElementById("addMemberBtn").addEventListener("click", () => openMemberModal(null));
 
 let editingMember = null;
@@ -1098,13 +1204,27 @@ function openMemberModal(m) {
   document.getElementById("mName").value = m?.name || "";
   document.getElementById("mRoleBn").value = m?.roleBn || "";
   document.getElementById("mRoleEn").value = m?.roleEn || "";
+  document.getElementById("mDesc").value = m?.desc || "";
+  
+  // Clear inputs
   document.getElementById("mPhotoUrlInput").value = m?.photoUrl || "";
+  document.getElementById("mPhotoFile").value = "";
+  
   const preview = document.getElementById("mPhotoPreview");
   if (m?.photoUrl) { preview.src = m.photoUrl; preview.hidden = false; } else { preview.hidden = true; }
-  document.getElementById("mPhotoFile").value = "";
   document.getElementById("memberModalBackdrop").hidden = false;
 }
+
 document.getElementById("cancelMemberBtn").addEventListener("click", () => (document.getElementById("memberModalBackdrop").hidden = true));
+
+// Real-time URL preview listener
+document.getElementById("mPhotoUrlInput").addEventListener("input", (e) => {
+    const preview = document.getElementById("mPhotoPreview");
+    if(e.target.value) { preview.src = e.target.value; preview.hidden = false; }
+    else { preview.hidden = true; }
+});
+
+// File upload preview listener
 document.getElementById("mPhotoFile").addEventListener("change", (e) => {
   const file = e.target.files[0];
   if (!file) return;
@@ -1115,16 +1235,26 @@ document.getElementById("mPhotoFile").addEventListener("change", (e) => {
 
 document.getElementById("saveMemberBtn").addEventListener("click", async () => {
   const file = document.getElementById("mPhotoFile").files[0];
-  let photoUrl = document.getElementById("mPhotoUrlInput").value.trim();
+  let finalPhotoUrl = document.getElementById("mPhotoUrlInput").value.trim(); 
+  
   try {
-    if (file) { photoUrl = await uploadImage(file, "members"); }
+    // If a file is uploaded, upload it to Firebase Storage and get the true Cloud URL!
+    if (file) {
+      showToast(lang==="bn" ? "ছবি আপলোড হচ্ছে..." : "Uploading image to Cloud...");
+      const sRef = storageRef(storage, `members/${Date.now()}_${file.name}`);
+      await uploadBytes(sRef, file);
+      finalPhotoUrl = await getDownloadURL(sRef);
+    }
+    
     const payload = {
       name: document.getElementById("mName").value.trim(),
       roleBn: document.getElementById("mRoleBn").value.trim(),
       roleEn: document.getElementById("mRoleEn").value.trim(),
-      photoUrl,
+      desc: document.getElementById("mDesc").value.trim(),
+      photoUrl: finalPhotoUrl,
       order: editingMember?.order ?? (allMembers.length + 1),
     };
+    
     if (editingMember && !editingMember.id.startsWith("__local")) {
       await updateDoc(doc(db, "members", editingMember.id), payload);
       Object.assign(editingMember, payload);
@@ -1132,10 +1262,11 @@ document.getElementById("saveMemberBtn").addEventListener("click", async () => {
       const ref = await addDoc(collection(db, "members"), payload);
       allMembers.push({ id: ref.id, ...payload });
     }
+    
     showToast(lang==="bn" ? "সদস্য সংরক্ষিত হয়েছে" : "Member saved");
     document.getElementById("memberModalBackdrop").hidden = true;
     renderMemberListPane(); renderMembers();
-  } catch (e) { showToast(lang==="bn" ? "সংরক্ষণ ব্যর্থ" : "Save failed"); }
+  } catch (e) { showToast(lang==="bn" ? "সংরক্ষণ ব্যর্থ" : "Save failed"); console.error(e); }
 });
 
 async function deleteMemberById(m) {
@@ -1154,9 +1285,23 @@ async function deleteMemberById(m) {
     document.documentElement.style.setProperty(map[id], e.target.value);
   });
 });
+
 document.getElementById("saveThemeBtn").addEventListener("click", async () => {
-  const colors = { navy: document.getElementById("colorNavy").value, gold: document.getElementById("colorGold").value, paper: document.getElementById("colorPaper").value };
-  try { await setDoc(doc(db, "content", "site"), { theme: colors }, { merge: true }); showToast(lang==="bn" ? "থিম সংরক্ষিত হয়েছে" : "Theme saved"); } catch (e) {}
+  const payload = {
+    theme: {
+        navy: document.getElementById("colorNavy").value,
+        gold: document.getElementById("colorGold").value,
+        paper: document.getElementById("colorPaper").value,
+    },
+    siteLogoUrl: document.getElementById("siteLogoUrl").value.trim(),
+    heroLogoUrl: document.getElementById("heroLogoUrl").value.trim()
+  };
+  
+  try {
+    await setDoc(doc(db, "content", "site"), payload, { merge: true });
+    showToast(lang==="bn" ? "ডিজাইন সংরক্ষিত হয়েছে" : "Design saved");
+    loadSiteContent(); 
+  } catch (e) { showToast(lang==="bn" ? "সংরক্ষণ ব্যর্থ" : "Save failed"); console.error(e);}
 });
 
 (async function init() {
