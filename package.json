@@ -1,0 +1,11 @@
+{
+"name": "jcsc-gk-website",
+"version": "1.0.0",
+"description": "JCSC GK Club Website",
+"scripts": {
+"start": "npx serve ."
+},
+"dependencies": {
+"@vercel/blob": "^0.23.1"
+}
+}
