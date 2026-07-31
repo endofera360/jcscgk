@@ -1,11 +1,41 @@
 import { put } from '@vercel/blob';
 
-export default async function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+export const config = {
+  runtime: 'edge',
+};
+
+export default async function handler(request) {
+  if (request.method !== 'POST') {
+    return new Response(JSON.stringify({ error: 'Method not allowed' }), {
+      status: 405,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
   try {
-    const blob = await put(`uploads/${Date.now()}.png`, req.body, { access: 'public' });
-    return res.status(200).json({ url: blob.url });
-  } catch (err) {
-    return res.status(500).json({ error: err.message });
+    const formData = await request.formData();
+    const file = formData.get('file');
+
+    if (!file) {
+      return new Response(JSON.stringify({ error: 'No file provided in request' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    const filename = `uploads/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
+    const blob = await put(filename, file, {
+      access: 'public',
+    });
+
+    return new Response(JSON.stringify({ url: blob.url }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  } catch (error) {
+    return new Response(JSON.stringify({ error: error.message || 'Upload failed' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 }
