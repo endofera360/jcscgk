@@ -22,7 +22,6 @@ export default async function handler(request) {
         headers: { 'Content-Type': 'application/json' },
       });
     }
-
     const filename = `uploads/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
     const blob = await put(filename, file, {
       access: 'public',
