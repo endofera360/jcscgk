@@ -130,7 +130,7 @@ img { max-width:100%; display:block; }
 .feature-card h3 { font-size:1.05rem; margin-bottom:6px; }
 .feature-card p { color:var(--text-muted); font-size:.92rem; margin:0; }
 
-.members-heading { margin:38px 0 16px; font-size:1.2rem; display: flex; justify-content: space-between; align-items: center;}
+.members-heading { margin:38px 0 16px; font-size:1.2rem; display: flex; justify- space-between; align-items: center;}
 .member-card { text-align:center; position:relative; display: flex; flex-direction: column; align-items: center; justify-content: flex-start;}
 .member-photo { width:88px; height:88px; border-radius:50%; object-fit:cover; margin:0 auto 12px; border:3px solid var(--gold); background:var(--border); }
 .member-name { font-weight:800; margin:0; font-size: 1.1rem; }
@@ -184,13 +184,15 @@ img { max-width:100%; display:block; }
 .edit-on .editable { outline:1px dashed var(--accent); border-radius:6px; cursor:text; padding: 2px; }
 .edit-on .editable:hover { background:rgba(201,162,75,.15); }
 .edit-on .editable:focus { outline:2px solid var(--accent); background:rgba(201,162,75,.2); }
+.edit-on img.editable-img { outline:2px dashed var(--gold); cursor:pointer; position:relative; }
+.edit-on img.editable-img:hover { outline:3px solid var(--accent); filter:brightness(1.1); }
 
 .panel-backdrop { position:fixed; inset:0; background:rgba(7,20,38,.45); z-index:180; display:flex; justify-content:flex-end; }
 .admin-panel { width:100%; max-width:480px; background:var(--surface); height:100%; overflow-y:auto; box-shadow:-10px 0 34px rgba(0,0,0,.25); display:flex; flex-direction:column; }
 .panel-header { display:flex; justify-content:space-between; align-items:center; padding:16px 18px; border-bottom:1px solid var(--border); background:var(--primary); color:#F6F4EE; }
 .panel-header .icon-btn { padding:6px 10px; }
-.panel-tabs { display:flex; border-bottom:1px solid var(--border); }
-.panel-tab { flex:1; padding:12px 8px; background:none; border:none; font-weight:700; font-size:.85rem; color:var(--text-muted); border-bottom:2px solid transparent; }
+.panel-tabs { display:flex; border-bottom:1px solid var(--border); flex-wrap:wrap; }
+.panel-tab { flex:1; padding:12px 8px; background:none; border:none; font-weight:700; font-size:.85rem; color:var(--text-muted); border-bottom:2px solid transparent; white-space:nowrap; }
 .panel-tab.active { color:var(--accent); border-bottom-color:var(--accent); }
 .panel-body { padding:18px; flex:1; overflow-y:auto; }
 .panel-pane[hidden] { display:none; }
@@ -221,7 +223,7 @@ img { max-width:100%; display:block; }
 <header class="site-header" id="siteHeader">
   <div class="container">
     <div class="brand" id="logoTrigger" title="Click multiple times for Admin Login">
-      <img src="image_bbe6d5.jpg" alt="JCSC GK Club" class="brand-logo" id="brandLogo" />
+      <img src="image_bbe6d5.jpg" alt="JCSC GK Club" class="brand-logo editable-img" id="brandLogo" data-img-key="siteLogoUrl" />
       <span class="editable" data-key="siteShort" data-t="siteShort">JCSC GK Club</span>
     </div>
     <nav class="nav-links" id="navLinks">
@@ -236,9 +238,9 @@ img { max-width:100%; display:block; }
     </div>
   </div>
   <div class="mobile-drawer" id="mobileDrawer" hidden>
-    <a href="#home" data-t="nav_home">হোম</a>
-    <a href="#about" data-t="nav_about">পরিচিতি</a>
-    <a href="#quiz" data-t="nav_quiz">কুইজ</a>
+    <a href="#home" class="editable" data-key="nav_home" data-t="nav_home">হোম</a>
+    <a href="#about" class="editable" data-key="nav_about" data-t="nav_about">পরিচিতি</a>
+    <a href="#quiz" class="editable" data-key="nav_quiz" data-t="nav_quiz">কুইজ</a>
   </div>
 </header>
 
@@ -256,7 +258,7 @@ img { max-width:100%; display:block; }
 <section class="hero" id="home">
   <div class="container hero-inner">
     <div class="hero-badge">
-      <img src="image_bbe6d5.jpg" alt="JCSC GK Club Logo" class="hero-logo" id="heroLogoImg" />
+      <img src="image_bbe6d5.jpg" alt="JCSC GK Club Logo" class="hero-logo editable-img" id="heroLogoImg" data-img-key="heroLogoUrl" />
       <div class="est-badge editable" data-key="estBadge">EST 2022</div>
     </div>
     <span class="eyebrow editable" data-key="heroEyebrow" data-t="hero_eyebrow">জোলশিরি ক্যান্টনমেন্ট স্কুল অ্যান্ড কলেজ</span>
@@ -282,17 +284,17 @@ img { max-width:100%; display:block; }
 
     <div class="grid cols-3" style="margin-bottom:40px;">
       <div class="card feature-card">
-        <div class="feature-icon">🎯</div>
+        <div class="feature-icon editable" data-key="feature1_icon">🎯</div>
         <h3 class="editable" data-key="feature1_title" data-t="feature1_title">লক্ষ্যভিত্তিক প্রস্তুতি</h3>
         <p class="editable" data-key="feature1_body" data-t="feature1_body">বিসিএস, আইএসএসবি ও ভাইভা — প্রতিটির জন্য আলাদা প্রশ্নব্যাংক।</p>
       </div>
       <div class="card feature-card">
-        <div class="feature-icon">🧠</div>
+        <div class="feature-icon editable" data-key="feature2_icon">🧠</div>
         <h3 class="editable" data-key="feature2_title" data-t="feature2_title">ব্যাখ্যাসহ শেখা</h3>
         <p class="editable" data-key="feature2_body" data-t="feature2_body">প্রতিটি উত্তরের পেছনে রয়েছে সংক্ষিপ্ত ও স্পষ্ট ব্যাখ্যা।</p>
       </div>
       <div class="card feature-card">
-        <div class="feature-icon">🔥</div>
+        <div class="feature-icon editable" data-key="feature3_icon">🔥</div>
         <h3 class="editable" data-key="feature3_title" data-t="feature3_title">প্রতিদিনের অনুশীলন</h3>
         <p class="editable" data-key="feature3_body" data-t="feature3_body">ধারাবাহিকতা বজায় রাখো, প্রতিদিন একটু একটু করে এগিয়ে যাও।</p>
       </div>
@@ -337,7 +339,7 @@ img { max-width:100%; display:block; }
 
 <footer class="site-footer">
   <div class="container">
-    <img src="image_bbe6d5.jpg" alt="" class="footer-logo" />
+    <img src="image_bbe6d5.jpg" alt="" class="footer-logo editable-img" id="footerLogoImg" data-img-key="siteLogoUrl" />
     <p class="footer-trigger editable" data-key="footer_rights" id="footerTrigger" data-t="footer_rights">© ২০২৬ জেসিএসসি জেনারেল-নলেজ ক্লাব। সর্বস্বত্ব সংরক্ষিত।</p>
   </div>
 </footer>
@@ -370,6 +372,7 @@ img { max-width:100%; display:block; }
     <div class="panel-tabs">
       <button class="panel-tab active" data-tab="questions" data-t="admin_questions">প্রশ্নসমূহ</button>
       <button class="panel-tab" data-tab="members" data-t="admin_members">সদস্যরা</button>
+      <button class="panel-tab" data-tab="content">Elementor &amp; Content</button>
       <button class="panel-tab" data-tab="design">ডিজাইন</button>
     </div>
 
@@ -394,14 +397,38 @@ img { max-width:100%; display:block; }
         <div id="memberList"></div>
       </div>
 
+      <!-- Elementor / Content Tab -->
+      <div class="panel-pane" data-pane="content" hidden>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">
+          সম্পাদনা মোড চালু থাকলে পেজের যেকোনো লেখায় সরাসরি ক্লিক করে এডিট করা যাবে। নিচের ফর্ম থেকেও পরিবর্তন করা সম্ভব:
+        </p>
+        <div class="field">
+          <label>Hero Title (বাংলা/English)</label>
+          <input type="text" id="panelHeroTitle" />
+        </div>
+        <div class="field">
+          <label>Hero Subtitle</label>
+          <textarea id="panelHeroSub" rows="2"></textarea>
+        </div>
+        <div class="field">
+          <label>About Title</label>
+          <input type="text" id="panelAboutTitle" />
+        </div>
+        <div class="field">
+          <label>About Body Text</label>
+          <textarea id="panelAboutBody" rows="3"></textarea>
+        </div>
+        <button class="btn small" id="saveContentPanelBtn" data-t="admin_save">সংরক্ষণ করুন</button>
+      </div>
+
       <!-- Design tab -->
       <div class="panel-pane" data-pane="design" hidden>
         <div class="field">
-          <label>Header & Footer Logo URL (ImgBB/Cloudflare)</label>
+          <label>Header & Footer Logo URL (Vercel / Direct Link)</label>
           <input type="text" id="siteLogoUrl" placeholder="https://..." />
         </div>
         <div class="field">
-          <label>Large Hero Logo URL (ImgBB/Cloudflare)</label>
+          <label>Large Hero Logo URL (Vercel / Direct Link)</label>
           <input type="text" id="heroLogoUrl" placeholder="https://..." />
         </div>
         <hr style="border:0; border-top:1px solid var(--border); margin:16px 0;">
@@ -424,15 +451,14 @@ img { max-width:100%; display:block; }
   </aside>
 </div>
 
-<!-- Question editor modal -->
 <div class="modal-backdrop" id="questionModalBackdrop" hidden>
   <div class="modal wide">
     <h3 id="questionModalTitle">প্রশ্ন সম্পাদনা</h3>
     
     <div class="field">
       <label>Media URL (Optional)</label>
-      <input id="qMediaUrl" placeholder="Paste ImgBB, Cloudflare R2, or YouTube URL here..." />
-      <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">Supports direct image URLs, .mp4 files, and YouTube video links.</p>
+      <input id="qMediaUrl" placeholder="Paste image, Vercel Blob, MP4, or YouTube URL here..." />
+      <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">Supports direct image URLs, .mp4 files, Vercel Blob URLs, and YouTube video links.</p>
     </div>
 
     <div class="two-col">
@@ -472,7 +498,6 @@ img { max-width:100%; display:block; }
   </div>
 </div>
 
-<!-- Member editor modal -->
 <div class="modal-backdrop" id="memberModalBackdrop" hidden>
   <div class="modal">
     <h3>সদস্য সম্পাদনা</h3>
@@ -481,14 +506,13 @@ img { max-width:100%; display:block; }
     <div class="field"><label>Role (English)</label><input id="mRoleEn" /></div>
     <div class="field"><label>Description / Info</label><textarea id="mDesc" rows="2"></textarea></div>
     
-    <!-- URL Input vs Firebase Storage Upload -->
     <div class="field">
-      <label>Photo URL (ImgBB, Cloudflare R2, Google Drive)</label>
-      <input id="mPhotoUrlInput" type="text" placeholder="Paste URL here for instant setup..." />
+      <label>Photo URL (Direct Link / Vercel Blob)</label>
+      <input id="mPhotoUrlInput" type="text" placeholder="Paste image URL here..." />
     </div>
     <div style="text-align:center; font-size:0.8rem; margin-bottom:8px; color:var(--text-muted);">--- OR ---</div>
     <div class="field">
-      <label>Upload File (Uses Firebase Storage)</label>
+      <label>Upload Image (Uses Vercel Blob Pipeline)</label>
       <input type="file" id="mPhotoFile" accept="image/*" />
       <img id="mPhotoPreview" class="photo-preview" hidden />
     </div>
@@ -496,6 +520,37 @@ img { max-width:100%; display:block; }
     <div style="display:flex; gap:10px;">
       <button class="btn" id="saveMemberBtn" data-t="admin_save">সংরক্ষণ করুন</button>
       <button class="btn secondary" id="cancelMemberBtn" data-t="admin_cancel">বাতিল</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="imageInspectorBackdrop" hidden>
+  <div class="modal">
+    <h3>🖼️ ছবির লিংক বা আপলোড সম্পাদনা</h3>
+    <p style="font-size:0.82rem; color:var(--text-muted);" id="imageInspectorTargetName">ছবি পরিবর্তন করুন</p>
+    <div class="field">
+      <label>Image Source URL</label>
+      <input type="text" id="inspectorUrlInput" placeholder="https://..." />
+    </div>
+    <div style="text-align:center; font-size:0.8rem; margin:8px 0; color:var(--text-muted);">--- OR ---</div>
+    <div class="field">
+      <label>Upload File (Vercel Upload)</label>
+      <input type="file" id="inspectorFileInput" accept="image/*" />
+    </div>
+    <div style="display:flex; gap:10px; margin-top:16px;">
+      <button class="btn" id="saveImageInspectorBtn">সংরক্ষণ করুন</button>
+      <button class="btn secondary" id="cancelImageInspectorBtn">বাতিল</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="confirmModalBackdrop" hidden>
+  <div class="modal">
+    <h3 id="confirmTitle">নিশ্চিতকরণ</h3>
+    <p id="confirmMessage" style="font-size:0.95rem; margin:12px 0; color:var(--text-muted);"></p>
+    <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:18px;">
+      <button class="btn" id="confirmYesBtn">হ্যাঁ</button>
+      <button class="btn secondary" id="confirmNoBtn">না</button>
     </div>
   </div>
 </div>
@@ -511,11 +566,7 @@ import {
   getFirestore, doc, getDoc, setDoc, collection, getDocs, addDoc,
   updateDoc, deleteDoc, query, orderBy
 } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-import { 
-  getStorage, ref as storageRef, uploadBytes, getDownloadURL 
-} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-storage.js";
 
-// Uses the requested Firebase Configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCkmnxaangcODr3wwsseKgbJy_D_Q1equw",
   authDomain: "jcscgk.firebaseapp.com",
@@ -529,7 +580,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-const storage = getStorage(app); 
 
 const DICT = {
   bn: {
@@ -656,6 +706,52 @@ function showToast(msg) {
   }, 3200);
 }
 
+function showConfirm(title, message, onConfirm) {
+  const backdrop = document.getElementById("confirmModalBackdrop");
+  document.getElementById("confirmTitle").textContent = title;
+  document.getElementById("confirmMessage").textContent = message;
+  backdrop.hidden = false;
+
+  const yesBtn = document.getElementById("confirmYesBtn");
+  const noBtn = document.getElementById("confirmNoBtn");
+
+  const cleanup = () => {
+    backdrop.hidden = true;
+    yesBtn.onclick = null;
+    noBtn.onclick = null;
+  };
+
+  yesBtn.onclick = () => { cleanup(); onConfirm(); };
+  noBtn.onclick = () => { cleanup(); };
+}
+
+async function uploadToVercelBlob(file) {
+  try {
+    const formData = new FormData();
+    formData.append("file", file);
+    
+    // Attempt upload to Vercel API endpoint `/api/upload` if deployed on Vercel
+    const res = await fetch("/api/upload", {
+      method: "POST",
+      body: formData
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      if (data.url) return data.url;
+    }
+  } catch (err) {
+    console.warn("Vercel Blob endpoint /api/upload not reachable, using Data URL streaming fallback.", err);
+  }
+
+  // Local streaming fallback for instant presentation
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.readAsDataURL(file);
+  });
+}
+
 let audioCtx = null;
 function playSound(type) {
     try {
@@ -775,6 +871,12 @@ async function loadSiteContent() {
           if (val.en) el.setAttribute("data-custom-en", val.en);
         }
       });
+
+      // Update Panel Content inputs
+      if (siteContent.text?.heroTitle) document.getElementById("panelHeroTitle").value = siteContent.text.heroTitle[lang] || "";
+      if (siteContent.text?.heroSub) document.getElementById("panelHeroSub").value = siteContent.text.heroSub[lang] || "";
+      if (siteContent.text?.aboutTitle) document.getElementById("panelAboutTitle").value = siteContent.text.aboutTitle[lang] || "";
+      if (siteContent.text?.aboutBody) document.getElementById("panelAboutBody").value = siteContent.text.aboutBody[lang] || "";
       
       // Load Custom Themes & Logos
       if (siteContent.theme) applyThemeColors(siteContent.theme, true);
@@ -782,7 +884,7 @@ async function loadSiteContent() {
       if (siteContent.siteLogoUrl) {
           document.getElementById("brandLogo").src = siteContent.siteLogoUrl;
           document.getElementById("favicon").href = siteContent.siteLogoUrl;
-          const footerLogo = document.querySelector(".footer-logo");
+          const footerLogo = document.getElementById("footerLogoImg");
           if(footerLogo) footerLogo.src = siteContent.siteLogoUrl;
           document.getElementById("siteLogoUrl").value = siteContent.siteLogoUrl;
       }
@@ -814,7 +916,6 @@ async function loadMembers() {
       allMembers = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
     } else {
       allMembers = defaultMembers();
-      // Auto-sync defaults to database so they persist and show in Admin panel
       allMembers.forEach(async (m) => {
          const { id, ...data } = m;
          await setDoc(doc(db, "members", id), data);
@@ -834,7 +935,7 @@ function renderMembers() {
     card.className = "card member-card";
     const initials = (m.name || "?").split(" ").map(s=>s[0]).slice(0,2).join("");
     card.innerHTML = `
-      ${m.photoUrl ? `<img class="member-photo" src="${m.photoUrl}" alt="${m.name}">` : `<div class="member-photo" style="display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--accent); font-size:1.5rem;">${initials}</div>`}
+      ${m.photoUrl ? `<img class="member-photo editable-img" src="${m.photoUrl}" alt="${m.name}" data-member-id="${m.id}">` : `<div class="member-photo" style="display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--accent); font-size:1.5rem;">${initials}</div>`}
       <p class="member-name">${m.name}</p>
       <p class="member-role">${lang === "bn" ? (m.roleBn||"") : (m.roleEn||m.roleBn||"")}</p>
       ${m.desc ? `<p class="member-desc">${m.desc}</p>` : ''}
@@ -1042,7 +1143,7 @@ document.getElementById("signOutBtn").addEventListener("click", async () => {
 document.getElementById("toggleEditModeBtn").addEventListener("click", () => {
   const on = document.body.classList.toggle("edit-on");
   document.querySelectorAll(".editable").forEach((el) => (el.contentEditable = on ? "true" : "false"));
-  if (on) showToast(lang==="bn" ? "সম্পাদনা মোড চালু — যেকোনো লেখায় ক্লিক করে বদলাও।" : "Edit mode on — click any text to change it.");
+  if (on) showToast(lang==="bn" ? "সম্পাদনা মোড চালু — যেকোনো লেখা বা ছবিতে ক্লিক করে বদলাও।" : "Edit mode on — click any text or image to edit.");
 });
 
 document.querySelectorAll(".editable").forEach((el) => {
@@ -1058,6 +1159,61 @@ document.querySelectorAll(".editable").forEach((el) => {
   });
 });
 
+let activeInspectedImageKey = null;
+let activeInspectedImgEl = null;
+
+document.addEventListener("click", (e) => {
+  if (!document.body.classList.contains("edit-on")) return;
+  const img = e.target.closest(".editable-img");
+  if (!img) return;
+
+  activeInspectedImgEl = img;
+  activeInspectedImageKey = img.getAttribute("data-img-key");
+
+  document.getElementById("imageInspectorTargetName").textContent = activeInspectedImageKey ? `Editing Key: ${activeInspectedImageKey}` : "Editing Member Photo";
+  document.getElementById("inspectorUrlInput").value = img.src || "";
+  document.getElementById("inspectorFileInput").value = "";
+  document.getElementById("imageInspectorBackdrop").hidden = false;
+});
+
+document.getElementById("cancelImageInspectorBtn").addEventListener("click", () => {
+  document.getElementById("imageInspectorBackdrop").hidden = true;
+});
+
+document.getElementById("saveImageInspectorBtn").addEventListener("click", async () => {
+  const file = document.getElementById("inspectorFileInput").files[0];
+  let finalUrl = document.getElementById("inspectorUrlInput").value.trim();
+
+  try {
+    if (file) {
+      showToast(lang === "bn" ? "Vercel এ ছবি আপলোড হচ্ছে..." : "Uploading image to Vercel...");
+      finalUrl = await uploadToVercelBlob(file);
+    }
+
+    if (!finalUrl) {
+      showToast(lang === "bn" ? "একটি লিংক অথবা ফাইল নির্বাচন করুন" : "Please enter a URL or file");
+      return;
+    }
+
+    if (activeInspectedImgEl) {
+      activeInspectedImgEl.src = finalUrl;
+    }
+
+    if (activeInspectedImageKey) {
+      await setDoc(doc(db, "content", "site"), { [activeInspectedImageKey]: finalUrl }, { merge: true });
+      showToast(lang === "bn" ? "ছবি এবং লিংক সংরক্ষিত হয়েছে" : "Image updated & saved");
+    } else if (activeInspectedImgEl && activeInspectedImgEl.hasAttribute("data-member-id")) {
+      const memberId = activeInspectedImgEl.getAttribute("data-member-id");
+      await updateDoc(doc(db, "members", memberId), { photoUrl: finalUrl });
+      showToast(lang === "bn" ? "সদস্য ছবি আপডেট করা হয়েছে" : "Member photo updated");
+    }
+
+    document.getElementById("imageInspectorBackdrop").hidden = true;
+  } catch (err) {
+    showToast(lang === "bn" ? "আপডেট করতে সমস্যা হয়েছে" : "Update failed");
+  }
+});
+
 document.getElementById("openPanelBtn").addEventListener("click", () => (document.getElementById("panelBackdrop").hidden = false));
 document.getElementById("closePanelBtn").addEventListener("click", () => (document.getElementById("panelBackdrop").hidden = true));
 document.getElementById("panelBackdrop").addEventListener("click", (e) => { if (e.target.id === "panelBackdrop") e.currentTarget.hidden = true; });
@@ -1068,6 +1224,24 @@ document.querySelectorAll(".panel-tab").forEach((tabBtn) => {
     tabBtn.classList.add("active");
     document.querySelectorAll(".panel-pane").forEach((p) => (p.hidden = p.dataset.pane !== tabBtn.dataset.tab));
   });
+});
+
+document.getElementById("saveContentPanelBtn").addEventListener("click", async () => {
+  const payload = {
+    text: {
+      heroTitle: { [lang]: document.getElementById("panelHeroTitle").value.trim() },
+      heroSub: { [lang]: document.getElementById("panelHeroSub").value.trim() },
+      aboutTitle: { [lang]: document.getElementById("panelAboutTitle").value.trim() },
+      aboutBody: { [lang]: document.getElementById("panelAboutBody").value.trim() }
+    }
+  };
+  try {
+    await setDoc(doc(db, "content", "site"), payload, { merge: true });
+    showToast(lang === "bn" ? "কনটেন্ট সংরক্ষিত হয়েছে" : "Content saved");
+    loadSiteContent();
+  } catch (e) {
+    showToast(lang === "bn" ? "সংরক্ষণ ব্যর্থ" : "Save failed");
+  }
 });
 
 function renderQuestionListPane() {
@@ -1148,15 +1322,20 @@ document.getElementById("saveQuestionBtn").addEventListener("click", async () =>
   } catch (e) { showToast(lang==="bn" ? "সংরক্ষণ ব্যর্থ হয়েছে" : "Save failed"); console.error(e);}
 });
 
-async function deleteQuestionById(q) {
-  if (!confirm(lang==="bn" ? "প্রশ্নটি মুছে ফেলতে চাও?" : "Delete this question?")) return;
-  try {
-    if (!q.id.startsWith("__local")) await deleteDoc(doc(db, "questions", q.id));
-    allQuestions = allQuestions.filter((x) => x.id !== q.id);
-    document.getElementById("statQuestions").textContent = allQuestions.length;
-    renderQuestionListPane();
-    showToast(lang==="bn" ? "প্রশ্ন মুছে ফেলা হয়েছে" : "Question deleted");
-  } catch (e) { showToast(lang==="bn" ? "মুছতে ব্যর্থ হয়েছে" : "Delete failed"); }
+function deleteQuestionById(q) {
+  showConfirm(
+    lang === "bn" ? "প্রশ্ন মুছে ফেলা" : "Delete Question",
+    lang === "bn" ? "তুমি কি নিশ্চিত যে এই প্রশ্নটি মুছে ফেলতে চাও?" : "Are you sure you want to delete this question?",
+    async () => {
+      try {
+        if (!q.id.startsWith("__local")) await deleteDoc(doc(db, "questions", q.id));
+        allQuestions = allQuestions.filter((x) => x.id !== q.id);
+        document.getElementById("statQuestions").textContent = allQuestions.length;
+        renderQuestionListPane();
+        showToast(lang==="bn" ? "প্রশ্ন মুছে ফেলা হয়েছে" : "Question deleted");
+      } catch (e) { showToast(lang==="bn" ? "মুছতে ব্যর্থ হয়েছে" : "Delete failed"); }
+    }
+  );
 }
 
 function renderMemberListPane() {
@@ -1206,7 +1385,6 @@ function openMemberModal(m) {
   document.getElementById("mRoleEn").value = m?.roleEn || "";
   document.getElementById("mDesc").value = m?.desc || "";
   
-  // Clear inputs
   document.getElementById("mPhotoUrlInput").value = m?.photoUrl || "";
   document.getElementById("mPhotoFile").value = "";
   
@@ -1217,14 +1395,12 @@ function openMemberModal(m) {
 
 document.getElementById("cancelMemberBtn").addEventListener("click", () => (document.getElementById("memberModalBackdrop").hidden = true));
 
-// Real-time URL preview listener
 document.getElementById("mPhotoUrlInput").addEventListener("input", (e) => {
     const preview = document.getElementById("mPhotoPreview");
     if(e.target.value) { preview.src = e.target.value; preview.hidden = false; }
     else { preview.hidden = true; }
 });
 
-// File upload preview listener
 document.getElementById("mPhotoFile").addEventListener("change", (e) => {
   const file = e.target.files[0];
   if (!file) return;
@@ -1238,12 +1414,9 @@ document.getElementById("saveMemberBtn").addEventListener("click", async () => {
   let finalPhotoUrl = document.getElementById("mPhotoUrlInput").value.trim(); 
   
   try {
-    // If a file is uploaded, upload it to Firebase Storage and get the true Cloud URL!
     if (file) {
-      showToast(lang==="bn" ? "ছবি আপলোড হচ্ছে..." : "Uploading image to Cloud...");
-      const sRef = storageRef(storage, `members/${Date.now()}_${file.name}`);
-      await uploadBytes(sRef, file);
-      finalPhotoUrl = await getDownloadURL(sRef);
+      showToast(lang==="bn" ? "Vercel এ ছবি আপলোড হচ্ছে..." : "Uploading image to Vercel...");
+      finalPhotoUrl = await uploadToVercelBlob(file);
     }
     
     const payload = {
@@ -1269,14 +1442,19 @@ document.getElementById("saveMemberBtn").addEventListener("click", async () => {
   } catch (e) { showToast(lang==="bn" ? "সংরক্ষণ ব্যর্থ" : "Save failed"); console.error(e); }
 });
 
-async function deleteMemberById(m) {
-  if (!confirm(lang==="bn" ? "সদস্যকে মুছে ফেলতে চাও?" : "Delete this member?")) return;
-  try {
-    if (!m.id.startsWith("__local")) await deleteDoc(doc(db, "members", m.id));
-    allMembers = allMembers.filter((x) => x.id !== m.id);
-    renderMemberListPane(); renderMembers();
-    showToast(lang==="bn" ? "মুছে ফেলা হয়েছে" : "Deleted");
-  } catch (e) { showToast(lang==="bn" ? "মুছতে ব্যর্থ" : "Delete failed"); }
+function deleteMemberById(m) {
+  showConfirm(
+    lang === "bn" ? "সদস্য মুছে ফেলা" : "Delete Member",
+    lang === "bn" ? "তুমি কি নিশ্চিত যে এই সদস্যকে মুছে ফেলতে চাও?" : "Are you sure you want to delete this member?",
+    async () => {
+      try {
+        if (!m.id.startsWith("__local")) await deleteDoc(doc(db, "members", m.id));
+        allMembers = allMembers.filter((x) => x.id !== m.id);
+        renderMemberListPane(); renderMembers();
+        showToast(lang==="bn" ? "মুছে ফেলা হয়েছে" : "Deleted");
+      } catch (e) { showToast(lang==="bn" ? "মুছতে ব্যর্থ" : "Delete failed"); }
+    }
+  );
 }
 
 ["colorNavy","colorGold","colorPaper"].forEach((id) => {
