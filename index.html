@@ -741,13 +741,36 @@ async function uploadToVercelBlob(file) {
       if (data.url) return data.url;
     }
   } catch (err) {
-    console.warn("Vercel Blob endpoint /api/upload not reachable, using Data URL streaming fallback.", err);
+    console.warn("Vercel Blob endpoint /api/upload not reachable, using Data URL fallback.", err);
   }
 
-  // Local streaming fallback for instant presentation
+  // Canvas image compression fallback to guarantee <1MB for Firestore & LocalStorage
   return new Promise((resolve) => {
     const reader = new FileReader();
-    reader.onload = () => resolve(reader.result);
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        let width = img.width;
+        let height = img.height;
+        const maxDim = 600;
+        if (width > maxDim || height > maxDim) {
+          if (width > height) {
+            height = Math.round((height * maxDim) / width);
+            width = maxDim;
+          } else {
+            width = Math.round((width * maxDim) / height);
+            height = maxDim;
+          }
+        }
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL("image/jpeg", 0.8));
+      };
+      img.src = e.target.result;
+    };
     reader.readAsDataURL(file);
   });
 }
@@ -857,42 +880,59 @@ let allQuestions = [...SEED_QUESTIONS];
 let allMembers = [];
 let siteContent = {};
 
+function applyLoadedContent(data) {
+  if (!data) return;
+  if (data.text) {
+    Object.entries(data.text).forEach(([key, val]) => {
+      const el = document.querySelector(`.editable[data-key="${key}"]`);
+      if (el && val) {
+        if (typeof val === 'object') {
+          if (val.bn) el.setAttribute("data-custom-bn", val.bn);
+          if (val.en) el.setAttribute("data-custom-en", val.en);
+        } else {
+          el.setAttribute("data-custom-bn", val);
+          el.setAttribute("data-custom-en", val);
+        }
+      }
+    });
+
+    if (data.text.heroTitle) document.getElementById("panelHeroTitle").value = (typeof data.text.heroTitle === 'object' ? data.text.heroTitle[lang] : data.text.heroTitle) || "";
+    if (data.text.heroSub) document.getElementById("panelHeroSub").value = (typeof data.text.heroSub === 'object' ? data.text.heroSub[lang] : data.text.heroSub) || "";
+    if (data.text.aboutTitle) document.getElementById("panelAboutTitle").value = (typeof data.text.aboutTitle === 'object' ? data.text.aboutTitle[lang] : data.text.aboutTitle) || "";
+    if (data.text.aboutBody) document.getElementById("panelAboutBody").value = (typeof data.text.aboutBody === 'object' ? data.text.aboutBody[lang] : data.text.aboutBody) || "";
+  }
+
+  if (data.theme) applyThemeColors(data.theme, true);
+  
+  if (data.siteLogoUrl) {
+    document.getElementById("brandLogo").src = data.siteLogoUrl;
+    document.getElementById("favicon").href = data.siteLogoUrl;
+    const footerLogo = document.getElementById("footerLogoImg");
+    if(footerLogo) footerLogo.src = data.siteLogoUrl;
+    document.getElementById("siteLogoUrl").value = data.siteLogoUrl;
+  }
+  
+  if (data.heroLogoUrl) {
+    document.getElementById("heroLogoImg").src = data.heroLogoUrl;
+    document.getElementById("heroLogoUrl").value = data.heroLogoUrl;
+  }
+}
+
 async function loadSiteContent() {
+  const localContent = localStorage.getItem("jcsc_site_content");
+  if (localContent) {
+    try {
+      siteContent = JSON.parse(localContent);
+      applyLoadedContent(siteContent);
+    } catch(e) {}
+  }
+
   try {
     const snap = await getDoc(doc(db, "content", "site"));
     if (snap.exists()) {
       siteContent = snap.data();
-      
-      // Load Custom Texts
-      Object.entries(siteContent.text || {}).forEach(([key, val]) => {
-        const el = document.querySelector(`.editable[data-key="${key}"]`);
-        if (el && val) {
-          if (val.bn) el.setAttribute("data-custom-bn", val.bn);
-          if (val.en) el.setAttribute("data-custom-en", val.en);
-        }
-      });
-
-      // Update Panel Content inputs
-      if (siteContent.text?.heroTitle) document.getElementById("panelHeroTitle").value = siteContent.text.heroTitle[lang] || "";
-      if (siteContent.text?.heroSub) document.getElementById("panelHeroSub").value = siteContent.text.heroSub[lang] || "";
-      if (siteContent.text?.aboutTitle) document.getElementById("panelAboutTitle").value = siteContent.text.aboutTitle[lang] || "";
-      if (siteContent.text?.aboutBody) document.getElementById("panelAboutBody").value = siteContent.text.aboutBody[lang] || "";
-      
-      // Load Custom Themes & Logos
-      if (siteContent.theme) applyThemeColors(siteContent.theme, true);
-      
-      if (siteContent.siteLogoUrl) {
-          document.getElementById("brandLogo").src = siteContent.siteLogoUrl;
-          document.getElementById("favicon").href = siteContent.siteLogoUrl;
-          const footerLogo = document.getElementById("footerLogoImg");
-          if(footerLogo) footerLogo.src = siteContent.siteLogoUrl;
-          document.getElementById("siteLogoUrl").value = siteContent.siteLogoUrl;
-      }
-      
-      if (siteContent.heroLogoUrl) {
-          document.getElementById("heroLogoImg").src = siteContent.heroLogoUrl;
-          document.getElementById("heroLogoUrl").value = siteContent.heroLogoUrl;
-      }
+      localStorage.setItem("jcsc_site_content", JSON.stringify(siteContent));
+      applyLoadedContent(siteContent);
     }
   } catch (e) { console.warn("Content load failed", e); }
   applyTranslations();
@@ -910,19 +950,30 @@ function applyThemeColors(colors, persistLocally = true) {
 }
 
 async function loadMembers() {
+  const localMembers = localStorage.getItem("jcsc_members");
+  if (localMembers) {
+    try {
+      allMembers = JSON.parse(localMembers);
+      renderMembers();
+    } catch(e) {}
+  }
+
   try {
-    const snap = await getDocs(query(collection(db, "members"), orderBy("order", "asc")));
+    const snap = await getDocs(collection(db, "members"));
     if (!snap.empty) {
       allMembers = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
-    } else {
+      allMembers.sort((a, b) => (a.order || 0) - (b.order || 0));
+      localStorage.setItem("jcsc_members", JSON.stringify(allMembers));
+    } else if (!localMembers) {
       allMembers = defaultMembers();
+      localStorage.setItem("jcsc_members", JSON.stringify(allMembers));
       allMembers.forEach(async (m) => {
          const { id, ...data } = m;
          await setDoc(doc(db, "members", id), data);
       });
     }
   } catch (e) {
-    allMembers = defaultMembers();
+    if (!allMembers.length) allMembers = defaultMembers();
   }
   renderMembers();
 }
@@ -945,10 +996,18 @@ function renderMembers() {
 }
 
 async function loadQuestions() {
+  const localQ = localStorage.getItem("jcsc_questions");
+  if (localQ) {
+    try {
+      allQuestions = JSON.parse(localQ);
+    } catch(e) {}
+  }
+
   try {
     const snap = await getDocs(collection(db, "questions"));
     if (!snap.empty) {
       allQuestions = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+      localStorage.setItem("jcsc_questions", JSON.stringify(allQuestions));
     }
   } catch (e) { console.warn("Using seed questions", e); }
   document.getElementById("statQuestions").textContent = allQuestions.length;
@@ -1152,10 +1211,19 @@ document.querySelectorAll(".editable").forEach((el) => {
     const key = el.getAttribute("data-key");
     if (!key) return;
     el.setAttribute("data-custom-" + lang, el.textContent);
+
+    if (!siteContent.text) siteContent.text = {};
+    if (!siteContent.text[key]) siteContent.text[key] = {};
+    if (typeof siteContent.text[key] === "string") {
+      siteContent.text[key] = { bn: siteContent.text[key], en: siteContent.text[key] };
+    }
+    siteContent.text[key][lang] = el.textContent;
+    localStorage.setItem("jcsc_site_content", JSON.stringify(siteContent));
+
     try {
-      await setDoc(doc(db, "content", "site"), { text: { [key]: { [lang]: el.textContent } } }, { merge: true });
+      await setDoc(doc(db, "content", "site"), { [`text.${key}.${lang}`]: el.textContent }, { merge: true });
       showToast(lang==="bn" ? "সংরক্ষিত হয়েছে" : "Saved");
-    } catch (e) { showToast(lang==="bn" ? "সংরক্ষণ ব্যর্থ" : "Save failed"); }
+    } catch (e) { showToast(lang==="bn" ? "সংরক্ষণ সম্পন্ন (লোকাল)" : "Saved locally"); }
   });
 });
 
@@ -1186,7 +1254,7 @@ document.getElementById("saveImageInspectorBtn").addEventListener("click", async
 
   try {
     if (file) {
-      showToast(lang === "bn" ? "Vercel এ ছবি আপলোড হচ্ছে..." : "Uploading image to Vercel...");
+      showToast(lang === "bn" ? "ছবি প্রসেস করা হচ্ছে..." : "Processing image...");
       finalUrl = await uploadToVercelBlob(file);
     }
 
@@ -1200,10 +1268,28 @@ document.getElementById("saveImageInspectorBtn").addEventListener("click", async
     }
 
     if (activeInspectedImageKey) {
+      siteContent[activeInspectedImageKey] = finalUrl;
+      localStorage.setItem("jcsc_site_content", JSON.stringify(siteContent));
+
+      if (activeInspectedImageKey === "siteLogoUrl") {
+        document.getElementById("brandLogo").src = finalUrl;
+        document.getElementById("favicon").href = finalUrl;
+        const footerLogo = document.getElementById("footerLogoImg");
+        if(footerLogo) footerLogo.src = finalUrl;
+        document.getElementById("siteLogoUrl").value = finalUrl;
+      } else if (activeInspectedImageKey === "heroLogoUrl") {
+        document.getElementById("heroLogoImg").src = finalUrl;
+        document.getElementById("heroLogoUrl").value = finalUrl;
+      }
+
       await setDoc(doc(db, "content", "site"), { [activeInspectedImageKey]: finalUrl }, { merge: true });
       showToast(lang === "bn" ? "ছবি এবং লিংক সংরক্ষিত হয়েছে" : "Image updated & saved");
     } else if (activeInspectedImgEl && activeInspectedImgEl.hasAttribute("data-member-id")) {
       const memberId = activeInspectedImgEl.getAttribute("data-member-id");
+      const m = allMembers.find(x => x.id === memberId);
+      if (m) m.photoUrl = finalUrl;
+      localStorage.setItem("jcsc_members", JSON.stringify(allMembers));
+
       await updateDoc(doc(db, "members", memberId), { photoUrl: finalUrl });
       showToast(lang === "bn" ? "সদস্য ছবি আপডেট করা হয়েছে" : "Member photo updated");
     }
@@ -1211,6 +1297,61 @@ document.getElementById("saveImageInspectorBtn").addEventListener("click", async
     document.getElementById("imageInspectorBackdrop").hidden = true;
   } catch (err) {
     showToast(lang === "bn" ? "আপডেট করতে সমস্যা হয়েছে" : "Update failed");
+    console.error(err);
+  }
+});
+
+document.getElementById("openPanelBtn").addEventListener("click", () => (document.getElementById("panelBackdrop").hidden = false));
+document.getElementById("closePanelBtn").addEventListener("click", () => (document.getElementById("panelBackdrop").hidden = true));
+document.getElementById("panelBackdrop").addEventListener("click", (e) => { if (e.target.id === "panelBackdrop") e.currentTarget.hidden = true; });
+
+document.querySelectorAll(".panel-tab").forEach((tabBtn) => {
+  tabBtn.addEventListener("click", () => {
+    document.querySelectorAll(".panel-tab").forEach((b) => b.classList.remove("active"));
+    tabBtn.classList.add("active");
+    document.querySelectorAll(".panel-pane").forEach((p) => (p.hidden = p.dataset.pane !== tabBtn.dataset.tab));
+  });
+});
+
+document.getElementById("saveContentPanelBtn").addEventListener("click", async () => {
+  const heroTitle = document.getElementById("panelHeroTitle").value.trim();
+  const heroSub = document.getElementById("panelHeroSub").value.trim();
+  const aboutTitle = document.getElementById("panelAboutTitle").value.trim();
+  const aboutBody = document.getElementById("panelAboutBody").value.trim();
+
+  if (!siteContent.text) siteContent.text = {};
+  
+  const updateTextObj = (key, val) => {
+    if (!siteContent.text[key]) siteContent.text[key] = {};
+    if (typeof siteContent.text[key] === 'string') {
+      siteContent.text[key] = { bn: siteContent.text[key], en: siteContent.text[key] };
+    }
+    siteContent.text[key][lang] = val;
+  };
+
+  updateTextObj("heroTitle", heroTitle);
+  updateTextObj("heroSub", heroSub);
+  updateTextObj("aboutTitle", aboutTitle);
+  updateTextObj("aboutBody", aboutBody);
+
+  localStorage.setItem("jcsc_site_content", JSON.stringify(siteContent));
+
+  const payload = {
+    text: {
+      heroTitle: siteContent.text.heroTitle,
+      heroSub: siteContent.text.heroSub,
+      aboutTitle: siteContent.text.aboutTitle,
+      aboutBody: siteContent.text.aboutBody
+    }
+  };
+
+  try {
+    await setDoc(doc(db, "content", "site"), payload, { merge: true });
+    showToast(lang === "bn" ? "কনটেন্ট সংরক্ষিত হয়েছে" : "Content saved");
+    applyLoadedContent(siteContent);
+    applyTranslations();
+  } catch (e) {
+    showToast(lang === "bn" ? "সংরক্ষণ সম্পন্ন (লোকাল)" : "Saved locally");
   }
 });
 
